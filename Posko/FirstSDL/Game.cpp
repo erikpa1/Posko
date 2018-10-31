@@ -1,9 +1,11 @@
 ﻿#include <iostream>
-
+#include "stdlib.h"
 #include "Game.h"
 #include "Window.h"
 #include "Player.h"
 
+#define MOVEMENT 10
+#define	STARTOFWINDOW 0
 
 
 
@@ -62,10 +64,40 @@ void Game::Stop()
 
 }
 
+<<<<<<< HEAD
 void Game::InitPlayer(Player* player)
 {	
 	player->Construct();
 	player->setW(5);
 	player->setH(10);
 	player->setX(_gameWindow->getH() / 2 - player->getH() / 2);
+=======
+void Game::changePosition(bool up, int amount, int playerChoose)
+{
+	auto helper = _players[0];
+
+	if(up)
+	{
+		if ((helper->getX() + helper->getH() + MOVEMENT) < _gameWindow->getH())
+		{
+			helper->setX(helper->getX() + MOVEMENT);
+		}
+	}
+	else
+	{
+		if ((helper->getX() - MOVEMENT) > STARTOFWINDOW)
+		{
+			helper->setX(helper->getX() - MOVEMENT);
+		}
+	}
+}
+
+void Game::InitPlayer(Player** player)
+{
+	*player = new Player();
+	(*player)->Construct();
+	(*player)->setW(5);
+	(*player)->setH(10);
+	(*player)->setX(_gameWindow->getH() / 2 - (*player)->getH() / 2);
+>>>>>>> 4716e5cbf4d68d04e6ba267abe9eda6ec390d6d8
 }
