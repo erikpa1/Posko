@@ -17,7 +17,7 @@ public:
 	void setY(int y) override;
 	void setW(int w) override;
 	void setH(int h) override;
-
+	void SetRenderer(SDL_Renderer* renderer) override;
 	void SetName(std::string name) override;
 
 

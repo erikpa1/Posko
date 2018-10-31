@@ -33,7 +33,7 @@ public:
 
 	virtual void AddChildren(Renderable* children);
 
-	void SetRenderer(SDL_Renderer * renderer);
+	virtual void SetRenderer(SDL_Renderer * renderer);
 
 protected:
 

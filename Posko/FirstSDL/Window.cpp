@@ -72,8 +72,9 @@ void Window::Update()
 
 void Window::Draw()
 {
-	SDL_RenderClear(_renderer);
+
 	SDL_SetRenderDrawColor(_renderer, _backgroundColor.x, _backgroundColor.y, _backgroundColor.z, _backgroundColor.w);
+	SDL_RenderClear(_renderer);
 	
 	if (!_children.empty())
 	{

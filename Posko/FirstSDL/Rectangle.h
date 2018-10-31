@@ -27,10 +27,6 @@ public:
 private:
 
 	SDL_Rect* _source = nullptr;
-	SDL_Rect* _destination = nullptr;
-	SDL_Texture* _texture = nullptr;
-	SDL_Surface* _surface = nullptr;
-
 	vec4 * _color;
 
 };

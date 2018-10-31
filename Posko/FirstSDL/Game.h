@@ -15,9 +15,7 @@ public:
 	void Stop();
 
 	void ChangePosition(bool up, int amount, int player);
-
-
-
+	   	 
 private:
 
 	bool _gameIsRunning = false;

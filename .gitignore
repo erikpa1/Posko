@@ -9,3 +9,5 @@
 *.pdb
 Posko/FirstSDL/Debug/FirstSDL.log
 *.log
+*.log
+*.obj

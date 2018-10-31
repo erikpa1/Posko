@@ -46,6 +46,12 @@ void Player::setH(int h)
 	_reprezentation->setH(h);
 }
 
+void Player::SetRenderer(SDL_Renderer* renderer)
+{
+	Renderable::SetRenderer(renderer);
+	_reprezentation->SetRenderer(renderer);
+}
+
 void Player::SetName(std::string name)
 {
 	_reprezentation->SetName("Reprezentation of " + name);

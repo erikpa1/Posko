@@ -8,6 +8,9 @@ int main(int argc, char* argv[]) {
 	game.Construct();
 	game.Start();
 	game.Destruct();
+
+
+
 	
 	return 0;
 }

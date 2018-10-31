@@ -22,14 +22,20 @@ void Game::Construct()
 	_players.push_back(new Player());
 	_players.push_back(new Player());
 
+	_players[0]->Construct();
+	_players[1]->Construct();
+
 	_players[0]->SetName("Player1");
 	_players[1]->SetName("Player2");
+
+	InitPlayer(_players[0]);
+	InitPlayer(_players[1]);
 
 	_gameWindow->AddChildren(_players[0]);
 	_gameWindow->AddChildren(_players[1]);
 		
-	_players[0]->setY(0);	
-	_players[1]->setY(_gameWindow->getW() - _players[1]->getW());
+	_players[0]->setX(0);	
+	_players[1]->setX(_gameWindow->getW() - _players[1]->getW());
 
 	
 }
@@ -48,6 +54,10 @@ void Game::Start()
 		{
 			_gameWindow->Update();
 			_gameWindow->Draw();
+
+			int newPose = (_players[0]->getY() + 1) % _gameWindow->getH();			
+			_players[0]->setY(newPose);
+						
 		}
 	} else
 	{
@@ -62,11 +72,10 @@ void Game::Stop()
 }
 
 void Game::InitPlayer(Player* player)
-{
-	player->Construct();
-	player->setW(5);
-	player->setH(10);
-	player->setX(_gameWindow->getH() / 2 - player->getH() / 2);
+{	
+	player->setW(20);
+	player->setH(70);
+	player->setY(_gameWindow->getH() / 2 - player->getH() / 2);
 }
 
 void Game::ChangePosition(bool up, int amount, int playerChoose)
