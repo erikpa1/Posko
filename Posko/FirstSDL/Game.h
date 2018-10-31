@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <vector>
 
 class Window;
 class Player;
@@ -13,6 +14,7 @@ public:
 	void Start();
 	void Stop();
 
+	void changePosition(bool up, int amount, int player);
 
 private:
 
@@ -21,7 +23,7 @@ private:
 	Window* _gameWindow = nullptr;
 	Player* _player1 = nullptr;
 	Player* _player2 = nullptr;
-
+	std::vector<Player*> _players;
 	void InitPlayer(Player** player);
 
 
