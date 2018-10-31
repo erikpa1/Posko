@@ -24,9 +24,6 @@ void Game::Construct()
 
 	_players[0]->SetName("Player1");
 	_players[1]->SetName("Player2");
-	
-	this->InitPlayer(_players[0]);
-	this->InitPlayer(_players[1]);
 
 	_gameWindow->AddChildren(_players[0]);
 	_gameWindow->AddChildren(_players[1]);
@@ -64,15 +61,15 @@ void Game::Stop()
 
 }
 
-<<<<<<< HEAD
 void Game::InitPlayer(Player* player)
-{	
+{
 	player->Construct();
 	player->setW(5);
 	player->setH(10);
 	player->setX(_gameWindow->getH() / 2 - player->getH() / 2);
-=======
-void Game::changePosition(bool up, int amount, int playerChoose)
+}
+
+void Game::ChangePosition(bool up, int amount, int playerChoose)
 {
 	auto helper = _players[0];
 
@@ -90,14 +87,4 @@ void Game::changePosition(bool up, int amount, int playerChoose)
 			helper->setX(helper->getX() - MOVEMENT);
 		}
 	}
-}
-
-void Game::InitPlayer(Player** player)
-{
-	*player = new Player();
-	(*player)->Construct();
-	(*player)->setW(5);
-	(*player)->setH(10);
-	(*player)->setX(_gameWindow->getH() / 2 - (*player)->getH() / 2);
->>>>>>> 4716e5cbf4d68d04e6ba267abe9eda6ec390d6d8
 }
