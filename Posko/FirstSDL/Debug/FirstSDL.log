@@ -2,7 +2,8 @@
   Game.cpp
   Player.cpp
   Rectangle.cpp
+  Source.cpp
   Window.cpp
-d:\ella\ellaacademy\c++\posko\firstsdl\window.cpp(26): warning C4060: switch statement contains no 'case' or 'default' labels
+d:\programovanie\posko\posko\firstsdl\window.cpp(26): warning C4060: switch statement contains no 'case' or 'default' labels
   Generating Code...
-  FirstSDL.vcxproj -> D:\Ella\EllaAcademy\C++\Posko\Debug\Posko.exe
+  FirstSDL.vcxproj -> D:\Programovanie\Posko\Posko\Debug\Posko.exe
