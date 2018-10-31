@@ -37,10 +37,10 @@ public:
 
 protected:
 
-	int _x;
-	int _y;
-	int _w;
-	int _h;
+	int _x = 0;
+	int _y = 0;
+	int _w = 0;
+	int _h = 0;
 
 	std::string _name;
 
@@ -67,42 +67,46 @@ inline void Renderable::Destruct()
 
 inline int Renderable::getX()
 {
-	return 0;
+	return _x;
 }
 
 inline int Renderable::getY()
 {
-	return 0;
+	return _y;
 }
 
 inline int Renderable::getW()
 {
-	return 0;
+	return _w;
 }
 
 inline int Renderable::getH()
 {
-	return 0;
+	return _h;
 }
 
 inline void Renderable::setX(int x)
 {
 	_x = x;
+	std::cout << _name << " has setted X to: " << _x << std::endl;
 }
 
 inline void Renderable::setY(int y)
 {
 	_y = y;
+	std::cout << _name << " has setted Y to: " << _y << std::endl;
 }
 
 inline void Renderable::setW(int w)
 {
 	_w = w;
+	std::cout << _name << " has setted w to: " << _w << std::endl;
 }
 
 inline void Renderable::setH(int h)
 {
 	_h = h;
+	std::cout << _name << " has setted H to: " << _h << std::endl;
 }
 
 inline void Renderable::SetName(std::string name)
@@ -137,7 +141,7 @@ inline void Renderable::PrintYourSelf(std::vector<std::string>* dataFiller)
 
 inline void Renderable::AddChildren(Renderable* children)
 {
-	_children.push_back(children);
+	_children.push_back(children);	
 }
 
 inline void Renderable::SetRenderer(SDL_Renderer* renderer)

@@ -5,6 +5,8 @@
 #include "Player.h"
 
 
+
+
 void Game::Construct()
 {
 	_gameWindow = new Window();
@@ -12,18 +14,25 @@ void Game::Construct()
 	_gameWindow->SetName("Game canvas");
 	_gameIsRunning = true;
 
-	this->InitPlayer(&_player1);
-	this->InitPlayer(&_player2);
+	std::cout << "Window width: " << _gameWindow->getW() << std::endl;
+	std::cout << "Window height: " << _gameWindow->getH() << std::endl;
 
-	_gameWindow->AddChildren(_player1);
-	_gameWindow->AddChildren(_player2);
+	_players.push_back(new Player());
+	_players.push_back(new Player());
 
-	_player1->SetName("Player1");
-	_player2->SetName("Player2");
+	_players[0]->SetName("Player1");
+	_players[1]->SetName("Player2");
+	
+	this->InitPlayer(_players[0]);
+	this->InitPlayer(_players[1]);
 
-	_player1->setY(0);	
-	_player2->setY(_gameWindow->getW() - _player2->getW());
+	_gameWindow->AddChildren(_players[0]);
+	_gameWindow->AddChildren(_players[1]);
+		
+	_players[0]->setY(0);	
+	_players[1]->setY(_gameWindow->getW() - _players[1]->getW());
 
+	
 }
 
 void Game::Destruct()
@@ -53,11 +62,10 @@ void Game::Stop()
 
 }
 
-void Game::InitPlayer(Player** player)
-{
-	*player = new Player();
-	(*player)->Construct();
-	(*player)->setW(5);
-	(*player)->setH(10);
-	(*player)->setX(_gameWindow->getH() / 2 - (*player)->getH() / 2);
+void Game::InitPlayer(Player* player)
+{	
+	player->Construct();
+	player->setW(5);
+	player->setH(10);
+	player->setX(_gameWindow->getH() / 2 - player->getH() / 2);
 }

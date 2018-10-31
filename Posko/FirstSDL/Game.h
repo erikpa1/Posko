@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <vector>
 
 class Window;
 class Player;
@@ -14,15 +15,17 @@ public:
 	void Stop();
 
 
+
+
 private:
 
 	bool _gameIsRunning = false;
 
+	std::vector<Player*> _players;
+	
 	Window* _gameWindow = nullptr;
-	Player* _player1 = nullptr;
-	Player* _player2 = nullptr;
 
-	void InitPlayer(Player** player);
+	void InitPlayer(Player* player);
 
 
 };

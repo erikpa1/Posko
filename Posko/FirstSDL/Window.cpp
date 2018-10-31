@@ -8,6 +8,39 @@ Window::Window()
 {
 }
 
+void Window::Construct()
+{
+	_isRunning = true;
+
+	_backgroundColor.x = 0;
+	_backgroundColor.y = 0;
+	_backgroundColor.z = 0;
+	_backgroundColor.w = 255;
+
+	_x = 500;
+	_y = 500;
+	_w = 800;
+	_h = 600;
+
+	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+	{
+		std::cout << "Failed to load SDL" << std::endl;
+	}
+
+	_window = SDL_CreateWindow("Pong", _x, _y, _w, _h, SDL_WINDOW_RESIZABLE);
+	_renderer = SDL_CreateRenderer(_window, -1, 0);
+
+}
+
+void Window::Destruct()
+{
+	SDL_DestroyWindow(_window);
+	SDL_DestroyRenderer(_renderer);
+	SDL_Quit();
+
+	delete this;
+}
+
 
 Window::~Window()
 {
@@ -50,6 +83,7 @@ void Window::Draw()
 		}
 	}		
 	SDL_RenderPresent(_renderer);
+
 }
 
 void Window::UpdateEvent(SDL_Event sdlEvent)
@@ -63,33 +97,4 @@ void Window::AddChildren(Renderable* children)
 	children->SetRenderer(_renderer);
 }
 
-void Window::Construct()
-{
-	_isRunning = true;
-	
-	_backgroundColor.x = 0;
-	_backgroundColor.y = 0;
-	_backgroundColor.z = 0;
-	_backgroundColor.w = 255;
 
-	_w = 800;
-	_h = 600;
-
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
-	{
-		std::cout << "Failed to load SDL" << std::endl;
-	}
-
-	_window = SDL_CreateWindow("Pong", 100, 100, _w, _h, SDL_WINDOW_RESIZABLE);
-	_renderer = SDL_CreateRenderer(_window, -1, 0);
-
-}
-
-void Window::Destruct()
-{
-	SDL_DestroyWindow(_window);
-	SDL_DestroyRenderer(_renderer);
-	SDL_Quit();
-
-	delete this;
-}

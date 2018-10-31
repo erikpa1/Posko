@@ -1,7 +1,9 @@
 *.vs
 *.obj
 *.lib
+*.log
 *.exp
 *.tlog
+*.1.tlog
 *.idb
 *.pdb
