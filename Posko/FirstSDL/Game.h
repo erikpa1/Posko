@@ -17,7 +17,7 @@ public:
 
 	void ChangePosition(bool up, int amount, int player);
 	void ballMovement(int direction);
-	void resetBallposition();
+	void resetBallPosition();
 	   	 
 private:
 

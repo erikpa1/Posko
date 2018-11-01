@@ -176,7 +176,7 @@ void Game::ballMovement(int direction)
 }
 
 
-void Game::resetBallposition()
+void Game::resetBallPosition()
 {
 	_ball->setX(_gameWindow->getW() / 2);
 	_ball->setY(_gameWindow->getH() / 2);
