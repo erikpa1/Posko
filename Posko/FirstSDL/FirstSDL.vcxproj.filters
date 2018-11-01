@@ -14,6 +14,9 @@
     <ClCompile Include="Rectangle.cpp">
       <Filter>Pong</Filter>
     </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>Pong</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -43,6 +46,9 @@
       <Filter>Pong</Filter>
     </ClInclude>
     <ClInclude Include="Rectangle.h">
+      <Filter>Pong</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.h">
       <Filter>Pong</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,11 +3,21 @@
 #include "Game.h"
 #include "Window.h"
 #include "Player.h"
+#include "Ball.h"
 
-#define MOVEMENT 10
+#define PLAYER_MOVEMENT 10
+#define BALL_MOVEMENT 2
 #define	STARTOFWINDOW 0
 
-
+//ball movement directions
+#define UP 1
+#define UPRIGHT 2
+#define UPLEFT 3
+#define DOWN 4
+#define DOWNRIGHT 5
+#define DOWNLEFT 6
+#define RIGHT 7
+#define LEFT 8
 
 void Game::Construct()
 {
@@ -37,7 +47,9 @@ void Game::Construct()
 	_players[0]->setX(0);	
 	_players[1]->setX(_gameWindow->getW() - _players[1]->getW());
 
-	
+	_ball = new Ball();
+	_ball->Construct();
+	_ball->SetName("Game ball");	
 }
 
 void Game::Destruct()
@@ -84,16 +96,88 @@ void Game::ChangePosition(bool up, int amount, int playerChoose)
 
 	if(up)
 	{
-		if ((helper->getX() + helper->getH() + MOVEMENT) < _gameWindow->getH())
+		if ((helper->getY() - PLAYER_MOVEMENT) >= STARTOFWINDOW)
 		{
-			helper->setX(helper->getX() + MOVEMENT);
+			helper->setY(helper->getY() - PLAYER_MOVEMENT);
 		}
 	}
 	else
 	{
-		if ((helper->getX() - MOVEMENT) > STARTOFWINDOW)
+		if ((helper->getY() + helper->getH() + PLAYER_MOVEMENT) <= _gameWindow->getH())
 		{
-			helper->setX(helper->getX() - MOVEMENT);
+			helper->setY(helper->getY() + PLAYER_MOVEMENT);
 		}
 	}
+}
+
+void Game::ballMovement(int direction)
+{
+	//TOTO MONSTRUM SOM STVORIL S LASKOU JE TO MOJE DIETA este tam nie su zahrnutí hraci
+	if(direction == UP)
+	{
+		if (_ball->getY() - BALL_MOVEMENT >= STARTOFWINDOW)
+		{
+			_ball->setY(_ball->getY() - BALL_MOVEMENT);
+		}
+	}
+	if (direction == UPRIGHT)
+	{
+		if (_ball->getY() - BALL_MOVEMENT >= STARTOFWINDOW && _ball->getX() + _ball->getW() + BALL_MOVEMENT <= _gameWindow->getW())
+		{
+			_ball->setY(_ball->getY() - BALL_MOVEMENT);
+			_ball->setX(_ball->getX() + BALL_MOVEMENT);
+		}
+	}
+	if (direction == RIGHT)
+	{
+		if (_ball->getX() + _ball->getW() + BALL_MOVEMENT <= _gameWindow->getW())
+		{
+			_ball->setX(_ball->getX() + BALL_MOVEMENT);
+		}
+	}
+	if (direction == DOWNRIGHT)
+	{
+		if (_ball->getY() + _ball->getH() + BALL_MOVEMENT <= _gameWindow->getH() && _ball->getX() + _ball->getW() + BALL_MOVEMENT <= _gameWindow->getW())
+		{
+			_ball->setY(_ball->getY() + BALL_MOVEMENT);
+			_ball->setX(_ball->getX() + BALL_MOVEMENT);
+		}
+	}
+	if (direction == DOWN)
+	{
+		if (_ball->getY() + _ball->getH() + BALL_MOVEMENT <= _gameWindow->getH())
+		{
+			_ball->setY(_ball->getY() + BALL_MOVEMENT);
+		}
+	}
+	if (direction == DOWNLEFT)
+	{
+		if (_ball->getY() + _ball->getH() + BALL_MOVEMENT <= _gameWindow->getH() && _ball->getX() - BALL_MOVEMENT >= STARTOFWINDOW)
+		{
+			_ball->setY(_ball->getY() + BALL_MOVEMENT);
+			_ball->setX(_ball->getX() - BALL_MOVEMENT);
+		}
+	}
+	if (direction == LEFT)
+	{
+		if (_ball->getX() - BALL_MOVEMENT >= _gameWindow->getW())
+		{
+			_ball->setX(_ball->getX() - BALL_MOVEMENT);
+		}
+	}
+	if (direction == UPLEFT)
+	{
+		if (_ball->getX() - BALL_MOVEMENT >= _gameWindow->getW() && _ball->getY() - BALL_MOVEMENT >= STARTOFWINDOW)
+		{
+			_ball->setY(_ball->getY() + BALL_MOVEMENT);
+			_ball->setX(_ball->getX() - BALL_MOVEMENT);
+		}
+	}
+}
+
+
+void Game::resetBallposition()
+{
+	_ball->setX(_gameWindow->getW() / 2);
+	_ball->setY(_gameWindow->getH() / 2);
 }
