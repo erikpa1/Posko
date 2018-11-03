@@ -10,14 +10,12 @@
 #define	STARTOFWINDOW 0
 
 //ball movement directions
-#define UP 1
-#define UPRIGHT 2
+#define UPRIGHT 0
+#define DOWNRIGHT 1
+#define RIGHT 2
 #define UPLEFT 3
-#define DOWN 4
-#define DOWNRIGHT 5
-#define DOWNLEFT 6
-#define RIGHT 7
-#define LEFT 8
+#define DOWNLEFT 4
+#define LEFT 5
 
 void Game::Construct()
 {
@@ -112,68 +110,74 @@ void Game::ChangePosition(bool up, int amount, int playerChoose)
 
 void Game::ballMovement(int direction)
 {
-	//TOTO MONSTRUM SOM STVORIL S LASKOU JE TO MOJE DIETA este tam nie su zahrnutí hraci
-	if(direction == UP)
+	switch (direction)
 	{
-		if (_ball->getY() - BALL_MOVEMENT >= STARTOFWINDOW)
-		{
-			_ball->setY(_ball->getY() - BALL_MOVEMENT);
-		}
+	case UPRIGHT:
+		_ball->setY(_ball->getY() - BALL_MOVEMENT);
+		_ball->setX(_ball->getX() + BALL_MOVEMENT);
+		break;
+	case RIGHT:
+		_ball->setX(_ball->getX() + BALL_MOVEMENT);
+		break;
+	case DOWNRIGHT:
+		_ball->setY(_ball->getY() + BALL_MOVEMENT);
+		_ball->setX(_ball->getX() + BALL_MOVEMENT);
+		break;
+	case  DOWNLEFT:
+		_ball->setY(_ball->getY() + BALL_MOVEMENT);
+		_ball->setX(_ball->getX() - BALL_MOVEMENT);
+		break;
+	case LEFT:
+		_ball->setX(_ball->getX() - BALL_MOVEMENT);
+		break;
+	case UPLEFT:
+		_ball->setY(_ball->getY() + BALL_MOVEMENT);
+		_ball->setX(_ball->getX() - BALL_MOVEMENT);
+		break;
+	default:
+		break;
 	}
-	if (direction == UPRIGHT)
+
+}
+
+void Game::detectColision()
+{
+	//hit by left player
+	if (_ball->getX() - BALL_MOVEMENT <= _players[0]->getX() + _players[0]->getW() &&
+		_ball->getY() >= _players[0]->getY() && _ball->getY() <= _players[0]->getY()+_players[0]->getH())
 	{
-		if (_ball->getY() - BALL_MOVEMENT >= STARTOFWINDOW && _ball->getX() + _ball->getW() + BALL_MOVEMENT <= _gameWindow->getW())
-		{
-			_ball->setY(_ball->getY() - BALL_MOVEMENT);
-			_ball->setX(_ball->getX() + BALL_MOVEMENT);
-		}
+		//change direction here
 	}
-	if (direction == RIGHT)
+	//hit by right player
+	if (_ball->getX() + _ball->getW() + BALL_MOVEMENT >= _players[1]->getX() &&
+		_ball->getY() >= _players[1]->getY() && _ball->getY() <= _players[1]->getY() + _players[1]->getH())
 	{
-		if (_ball->getX() + _ball->getW() + BALL_MOVEMENT <= _gameWindow->getW())
-		{
-			_ball->setX(_ball->getX() + BALL_MOVEMENT);
-		}
+		//change direction here
 	}
-	if (direction == DOWNRIGHT)
+	//hit by left wall
+	if (_ball->getX() - BALL_MOVEMENT <= STARTOFWINDOW)
 	{
-		if (_ball->getY() + _ball->getH() + BALL_MOVEMENT <= _gameWindow->getH() && _ball->getX() + _ball->getW() + BALL_MOVEMENT <= _gameWindow->getW())
-		{
-			_ball->setY(_ball->getY() + BALL_MOVEMENT);
-			_ball->setX(_ball->getX() + BALL_MOVEMENT);
-		}
+		//add score to right player
+		resetBallPosition();
 	}
-	if (direction == DOWN)
+	//hit by right wall
+	if (_ball->getX() + _ball->getW() + BALL_MOVEMENT >= _gameWindow->getW())
 	{
-		if (_ball->getY() + _ball->getH() + BALL_MOVEMENT <= _gameWindow->getH())
-		{
-			_ball->setY(_ball->getY() + BALL_MOVEMENT);
-		}
+		//add score to left player
+		resetBallPosition();
 	}
-	if (direction == DOWNLEFT)
+	//hit by top wall
+	if (_ball->getY() <= STARTOFWINDOW)
 	{
-		if (_ball->getY() + _ball->getH() + BALL_MOVEMENT <= _gameWindow->getH() && _ball->getX() - BALL_MOVEMENT >= STARTOFWINDOW)
-		{
-			_ball->setY(_ball->getY() + BALL_MOVEMENT);
-			_ball->setX(_ball->getX() - BALL_MOVEMENT);
-		}
+		//change direction here
 	}
-	if (direction == LEFT)
+	//hit by bottom wall
+	if (_ball->getY() >= _gameWindow->getH())
 	{
-		if (_ball->getX() - BALL_MOVEMENT >= _gameWindow->getW())
-		{
-			_ball->setX(_ball->getX() - BALL_MOVEMENT);
-		}
-	}
-	if (direction == UPLEFT)
-	{
-		if (_ball->getX() - BALL_MOVEMENT >= _gameWindow->getW() && _ball->getY() - BALL_MOVEMENT >= STARTOFWINDOW)
-		{
-			_ball->setY(_ball->getY() + BALL_MOVEMENT);
-			_ball->setX(_ball->getX() - BALL_MOVEMENT);
-		}
+		//change direction here
 	}
 }
+
 
 
 void Game::resetBallPosition()
