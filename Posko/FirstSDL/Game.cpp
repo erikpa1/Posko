@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Ball.h"
 
+
 #define PLAYER_MOVEMENT 10
 #define BALL_MOVEMENT 2
 #define	STARTOFWINDOW 0
@@ -43,6 +44,8 @@ void Game::Construct()
 
 	_gameWindow->AddChildren(_players[0]);
 	_gameWindow->AddChildren(_players[1]);
+
+	_gameWindow->AddEventRecievers(this);
 		
 	_players[0]->setX(0);	
 	_players[1]->setX(_gameWindow->getW() - _players[1]->getW());
@@ -65,11 +68,7 @@ void Game::Start()
 		while (_gameIsRunning)
 		{
 			_gameWindow->Update();
-			_gameWindow->Draw();
-
-			int newPose = (_players[0]->getY() + 1) % _gameWindow->getH();			
-			_players[0]->setY(newPose);
-						
+			_gameWindow->Draw();						
 		}
 	} else
 	{
@@ -81,6 +80,18 @@ void Game::Start()
 void Game::Stop()
 {
 
+}
+
+void Game::RecieveEvent(SDL_Event event)
+{
+	std::cout << "Game prijala " << event.type << endl;
+
+	switch (event.type)
+	{
+	case SDLK_DOWN:		
+		ChangePosition(false, 10, 0);
+		break;
+	}
 }
 
 void Game::InitPlayer(Player* player)

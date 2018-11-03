@@ -51,5 +51,8 @@
     <ClInclude Include="Ball.h">
       <Filter>Pong</Filter>
     </ClInclude>
+    <ClInclude Include="EventReciever.h">
+      <Filter>Renderable</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

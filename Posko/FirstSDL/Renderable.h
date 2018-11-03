@@ -52,7 +52,7 @@ protected:
 
 inline void Renderable::Draw()
 {
-	this->PrintYourSelf();
+	//this->PrintYourSelf();
 }
 
 inline void Renderable::UpdateEvent(SDL_Event sdlEvent)
@@ -88,25 +88,25 @@ inline int Renderable::getH()
 inline void Renderable::setX(int x)
 {
 	_x = x;
-	std::cout << _name << " has setted X to: " << _x << std::endl;
+	//std::cout << _name << " has setted X to: " << _x << std::endl;
 }
 
 inline void Renderable::setY(int y)
 {
 	_y = y;
-	std::cout << _name << " has setted Y to: " << _y << std::endl;
+	//std::cout << _name << " has setted Y to: " << _y << std::endl;
 }
 
 inline void Renderable::setW(int w)
 {
 	_w = w;
-	std::cout << _name << " has setted w to: " << _w << std::endl;
+	//std::cout << _name << " has setted w to: " << _w << std::endl;
 }
 
 inline void Renderable::setH(int h)
 {
 	_h = h;
-	std::cout << _name << " has setted H to: " << _h << std::endl;
+	//std::cout << _name << " has setted H to: " << _h << std::endl;
 }
 
 inline void Renderable::SetName(std::string name)

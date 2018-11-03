@@ -57,6 +57,10 @@ void Window::Update()
 		{
 			
 		}
+		for (auto temp : _recievers)
+		{
+			temp->RecieveEvent(event);
+		}
 
 		for (auto temp : _children)
 		{
@@ -90,6 +94,11 @@ void Window::Draw()
 void Window::UpdateEvent(SDL_Event sdlEvent)
 {
 	
+}
+
+void Window::AddEventRecievers(EventReciever * reciever)
+{
+	_recievers.push_back(reciever);
 }
 
 void Window::AddChildren(Renderable* children)

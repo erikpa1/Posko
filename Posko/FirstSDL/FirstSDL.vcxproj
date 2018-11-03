@@ -147,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="EventReciever.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Player.h" />
