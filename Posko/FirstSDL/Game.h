@@ -17,8 +17,12 @@ public:
 	void Start();
 	void Stop();
 
+<<<<<<< HEAD
 	void RecieveEvent(SDL_Event event) override;
 
+=======
+	//Players
+>>>>>>> 9d5e1461ed1978f66fad61a69b1f14c6f1fd8be0
 	void ChangePosition(bool up, int amount, int player);
 	void ballMovement(int direction);
 	void resetBallPosition();
