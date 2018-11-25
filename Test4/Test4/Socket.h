@@ -20,5 +20,6 @@ public:
 	void Destruct();
 
 	void SendToClients(std::string data);
+	std::string ReadFromClient();
 
 };

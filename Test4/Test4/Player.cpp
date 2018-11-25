@@ -48,28 +48,6 @@ void Player::SetName(std::string name)
 	
 }
 
-void Player::SetSocket(Socket* socket)
-{
-	_socket = socket;
-}
-
-void Player::UpdateNetworkAlternative()
-{
-	std::string messageToSend;
-	messageToSend += "0";
-	messageToSend += ";";
-	messageToSend += _name;
-	messageToSend += _x+";";
-	messageToSend += _y+";";
-	messageToSend += _w+";";
-	messageToSend += _h+";";
-
-	if (_socket != nullptr)
-	{
-		_socket->SendToClients(messageToSend);
-	}
-}
-
 void Player::Draw()
 {	
 	

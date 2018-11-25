@@ -2,7 +2,6 @@
 #include "Renderable.h"
 
 class Rectangle;
-class Socket;
 
 class Player : public Renderable
 {
@@ -20,17 +19,7 @@ public:
 	void setH(int h) override;	
 	void SetName(std::string name) override;
 
-	void SetSocket(Socket * socket);
-	void UpdateNetworkAlternative();
-
 	void Draw() override;
 
 	void Update() override;
-
-private:
-
-	Socket * _socket = nullptr;
-
-
-
 };

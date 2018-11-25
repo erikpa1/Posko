@@ -1,9 +1,11 @@
 
 #include <iostream>
+#include "AppControll.h"
 
 int main()
 {
-	std::cout << "Ahoj" << std::endl;
-
+	AppControll app;
+	app.Construct();
+	app.Start();
 	return 0;
 }

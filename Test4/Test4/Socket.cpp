@@ -82,5 +82,11 @@ void Socket::Destruct()
 
 void Socket::SendToClients(std::string data)
 {
+	
 
+}
+
+std::string Socket::ReadFromClient()
+{
+	return "";
 }

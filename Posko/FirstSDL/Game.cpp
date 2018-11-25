@@ -83,13 +83,22 @@ void Game::Stop()
 void Game::RecieveEvent(SDL_Event event)
 {
 	std::cout << "Game prijala " << event.type << endl;
-
-	switch (event.type)
+	
+	if (event.type == SDL_KEYDOWN)
 	{
-	case SDLK_DOWN:		
-		ChangePosition(false, 10, 0);
-		break;
+		switch(event.key.keysym.sym)
+		{
+			case SDLK_UP:
+			ChangePosition(true, 10, 0);
+			break;
+
+			case SDLK_DOWN:
+			ChangePosition(false, 10, 0);
+			break;			
+		}
 	}
+
+	
 }
 
 void Game::InitPlayer(Player* player)
