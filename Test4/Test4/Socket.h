@@ -7,6 +7,10 @@ class Socket
 private:
 		
 	int _port;
+	int _sockfd;
+	int _newsockfd;
+	socklen_t cli_len;
+
 
 public:
 
@@ -14,5 +18,7 @@ public:
 
 	void Consturct();
 	void Destruct();
+
+	void SendToClients(std::string data);
 
 };
