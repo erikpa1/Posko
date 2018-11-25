@@ -1,0 +1,12 @@
+OUTPUTS = Test4
+CC = gcc
+
+.PHONY: all clean
+
+all: $(OUTPUTS) 
+
+clean: 
+	rm -f $(OUTPUTS)
+
+%: %.cpp %.h
+	$(CC) %^ -o $@
