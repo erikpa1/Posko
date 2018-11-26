@@ -83,7 +83,8 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <RemoteBuildCommandLine>make ~/projects/Test4/</RemoteBuildCommandLine>
+    <RemoteBuildCommandLine>
+    </RemoteBuildCommandLine>
     <RemoteReBuildCommandLine>
     </RemoteReBuildCommandLine>
     <RemoteCleanCommandLine>
@@ -91,6 +92,8 @@
     <RemoteBuildOutputs>
     </RemoteBuildOutputs>
     <NMakeForcedIncludes>sys/socket.h</NMakeForcedIncludes>
+    <BuildCommandLine>
+    </BuildCommandLine>
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="AppControll.cpp" />

@@ -1,12 +1,9 @@
-OUTPUTS = Test4
-CC = gcc
+all:
 
-.PHONY: all clean
+clean:
+	rm -f piskvorky
 
-all: $(OUTPUTS) 
+piskvorky:	Source.cpp	AppControll.h AppControll.cpp Player.h Player.cpp Ball.h Ball.cpp Renderable.h Socket.h Socket.cpp
+	g++	 $? -o piskvorky
 
-clean: 
-	rm -f $(OUTPUTS)
-
-%: %.cpp %.h
-	$(CC) %^ -o $@
+all: clean piskvorky

@@ -12,7 +12,7 @@ public:
 
 	void Construct() override;
 	void Destruct() override;
-
+	
 	void setX(int x) override;
 	void setY(int y) override;
 	void setW(int w) override;

@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
-#include "Socket.h"
+//#include "Socket.h"
 
 class vec4;
 
@@ -33,8 +33,8 @@ public:
 
 	virtual void AddChildren(Renderable* children);
 
-	virtual void SetSocket(Socket * socket);
-	virtual void UpdateNetworkAlternative();
+	//virtual void SetSocket(Socket * socket);
+	//virtual void UpdateNetworkAlternative();
 
 protected:
 
@@ -43,7 +43,7 @@ protected:
 	int _w = 0;
 	int _h = 0;
 
-	Socket * _socket = nullptr;
+	//Socket * _socket = nullptr;
 	std::string _name;
 	std::vector<Renderable*> _children;
 
@@ -140,7 +140,7 @@ inline void Renderable::AddChildren(Renderable* children)
 {
 	_children.push_back(children);	
 }
-
+/*
 inline void Renderable::SetSocket(Socket* socket)
 {
 	_socket = socket;
@@ -161,3 +161,4 @@ inline void Renderable::UpdateNetworkAlternative()
 	}
 
 }
+*/

@@ -28,7 +28,7 @@ public:
 	bool getDown();
 	bool getLeft();
 	bool getRight();
-	void SetRenderer(SDL_Renderer* renderer) override;
+	//void SetRenderer(SDL_Renderer* renderer) override;
 	void SetName(std::string name) override;
 
 	void Draw() override;

@@ -6,6 +6,7 @@ int main()
 {
 	AppControll app;
 	app.Construct();
-	app.Start();
+	std::cout << "Server going to start" << std::endl;
+	app.Start();	
 	return 0;
 }
