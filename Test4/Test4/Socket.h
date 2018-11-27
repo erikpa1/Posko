@@ -11,9 +11,6 @@ private:
 	int _sockfd;
 	int _newsockfd;
 	
-
-
-
 public:
 
 	Socket(int port);

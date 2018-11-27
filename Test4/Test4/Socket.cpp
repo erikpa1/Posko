@@ -38,6 +38,7 @@ void Socket::Consturct()
 		cout << "Server initialized socket" << endl;
 	}
 
+	cout << "Going to initialize server" << endl;
 	if (bind(_sockfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) 
 	{
 		cout << "Server failed to bind adress" << endl;
@@ -49,15 +50,15 @@ void Socket::Consturct()
 	listen(_sockfd, 5); 
 	cli_len = sizeof(cli_addr);
 
-	_newsockfd = accept(_sockfd, (struct sockaddr*)&cli_addr, &cli_len); 
+	cout << "Going to accept" << endl;
+	_newsockfd = accept(_sockfd, (struct sockaddr*)&cli_addr, &cli_len);
 	if (_newsockfd < 0)
 	{
 		cout << "ERROR on accept" << endl;
+	} else
+	{
+		cout << "Socket accepted" << endl;
 	}
-
-
-
-		
 }
 
 void Socket::Destruct()
@@ -72,17 +73,14 @@ void Socket::SendToClients(std::string data)
 	if (ret < 0)
 	{
 		perror("Error writing to socket");
-
 	}
-
 }
 
 std::string Socket::ReadFromClient()
 {
 	std::string clientMessage;	
 	char buffer[256];
-
-
+	
 	int ret = read(_newsockfd, buffer, 256);
 	if (ret < 0)
 	{

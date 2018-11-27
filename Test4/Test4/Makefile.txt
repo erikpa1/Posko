@@ -1,9 +1,9 @@
 all:
 
 clean:
-	rm -f piskvorky
+	rm -f pong
 
-piskvorky:	Source.cpp	AppControll.h AppControll.cpp Player.h Player.cpp Ball.h Ball.cpp Renderable.h Socket.h Socket.cpp
-	g++	 $? -o piskvorky
+pong: Source.cpp AppControll.h AppControll.cpp Player.h Player.cpp Ball.h Ball.cpp Renderable.h Socket.h Socket.cpp
+	g++	 $? -o pong
 
-all: clean piskvorky
+all: clean pong

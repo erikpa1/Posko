@@ -78,6 +78,7 @@ int main()
 		if (iResult == SOCKET_ERROR) {
 			closesocket(ConnectSocket);
 			ConnectSocket = INVALID_SOCKET;
+			cout << "Socket was closed" << endl;
 			continue;
 		} else
 		{
