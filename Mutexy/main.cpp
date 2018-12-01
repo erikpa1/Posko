@@ -11,10 +11,11 @@
  * Created on December 1, 2018, 10:54 PM
  */
 
-#include <cstdlib>
-#include <unistd.h>
-#include <pthread.h>
+
+#include <stdio.h>
 #include <stdlib.h>
+#include <pthread.h> //includnute pre vlakna
+#include <unistd.h>
 #include <iostream>
 
 using namespace std;
@@ -31,13 +32,6 @@ struct arguments {
     pthread_cond_t* condition;
 };
 
-void* computeFibNumbers(void* arg)
-{
-    arguments * p = (arguments*)arg;
-    pthread_mutex_lock(p->mutex);
-    int fibIndex = rand() % 41;
-      
-}
 
 int getFinNumber(int n)
 {
@@ -50,15 +44,83 @@ int getFinNumber(int n)
     
 }
 
+void* computeFibNumbers(void* arg)
+{
+    arguments * p = (arguments*)arg;
+    pthread_mutex_lock(p->mutex);
+    while(p->firstFreeIndex < p->arraySize)
+    {
+        pthread_mutex_unlock(p->mutex);
+        int fibIndex = rand() % 41;
+        int fibNumber = getFinNumber(fibIndex);
+        pthread_mutex_lock(p->mutex);
+        p->arrayOfFibNumbers[p->firstFreeIndex] = fibNumber;
+        p->firstFreeIndex++;
+        pthread_mutex_unlock(p->mutex);
+        pthread_cond_signal(p->condition);
+    }
+    
+    return NULL;      
+}
+
+void * printOneFibNumber(void * arg)
+{
+    arguments * p = (arguments*)arg;
+    int i = 0;
+    while(i < p->arraySize)
+    {
+        pthread_mutex_lock(p->mutex);
+        while(i >= p->firstFreeIndex)
+        {
+            pthread_cond_wait(p->condition, p->mutex);
+        }
+        pthread_mutex_unlock(p->mutex);
+
+         cout << i << " Fib nubmer is " << p->arrayOfFibNumbers[i] << endl;
+    }
+    
+    return NULL;
+}
+
+
+void printFibNumbers(int fibNumbers[], int fibNumbersCount)
+{
+    for (int i = 0; i < fibNumbersCount; i++)
+    {
+        cout << i << " Fib nubmer is " << fibNumbers[i] << endl;
+    }
+    
+}
 
 
 int main(int argc, char** argv) {
     
-    while(true)
-    {
-        cout << "Ahoj" << endl;
-    }
-
+    pthread_t thread1;
+    pthread_t thread2;
+    pthread_t thread3;
+    pthread_mutex_t mutex;
+    pthread_mutex_init(&mutex, NULL);
+    pthread_cond_t condition;
+    pthread_cond_init(&condition, NULL);
+    
+    int fibNumbersCount = 40;
+    int * fibNumbers = new int[fibNumbersCount];
+    
+    arguments pthread1 = {fibNumbersCount, 0, fibNumbers, &mutex, &condition};
+    
+    pthread_create(&thread1, NULL, computeFibNumbers, &pthread1);
+    pthread_create(&thread2, NULL, computeFibNumbers, &pthread1);
+    pthread_create(&thread3, NULL, printOneFibNumber, &pthread1);
+    
+    pthread_join(thread1, NULL);
+    pthread_join(thread2, NULL);
+    pthread_join(thread3, NULL);
+    
+    pthread_mutex_destroy(&mutex);
+    pthread_cond_destroy(&condition);
+    
+    delete [] fibNumbers;
+    
 
     return 0;
 }
