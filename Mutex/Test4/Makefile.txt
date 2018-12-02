@@ -1,0 +1,9 @@
+all:
+
+clean:
+	rm -f pong
+
+pong: Source.cpp 
+	g++	 $? -o pong
+
+all: clean pong
