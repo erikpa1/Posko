@@ -39,9 +39,9 @@ private:
 	Rectangle* _reprezentation = nullptr;
 	//urobil som to inac takze asi ich ani nebude treba a ball bude moct byt iba dalsia instancia hraca
 	bool up = true;
-	bool down = true;
+	bool down = false;
 	bool left = true;
-	bool right =  true;
+	bool right =  false;
 };
 
 

@@ -1,3 +1,6 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (FirstSDL.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   Game.cpp
+  Window.cpp
+d:\programovanie\posko\posko\firstsdl\window.cpp(59): warning C4060: switch statement contains no 'case' or 'default' labels
+  Generating Code...
   FirstSDL.vcxproj -> D:\Programovanie\Posko\Posko\Debug\Posko.exe
