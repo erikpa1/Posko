@@ -21,13 +21,9 @@ public:
 
 
 	//Players
-
 	void ChangePosition(bool up, int amount, int player);
 
-	//Ball
-	void ballMovement(int direction);
-	void detectColision();
-	void resetBallPosition();
+
 	   	 
 private:
 

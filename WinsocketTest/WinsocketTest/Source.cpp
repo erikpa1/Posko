@@ -45,8 +45,8 @@ int main()
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = IPPROTO_TCP;
 	
-	// Resolve the server address and port
-	iResult = getaddrinfo("frios2.fri.uniza.sk", DEFAULT_PORT, &hints, &result);
+	// Resolve the server address and port frios2.fri.uniza.sk
+	iResult = getaddrinfo("127.0.0.1", DEFAULT_PORT, &hints, &result);
 	if (iResult != 0) {
 		cout << "getaddrinfo failed with error: " << iResult << endl;
 		WSACleanup();
