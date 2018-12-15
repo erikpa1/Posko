@@ -4,7 +4,7 @@
 #include "WindowsServer/WindowsServer/Socket.h"
 
 #define PLAYER_MOVEMENT 10
-#define BALL_MOVEMENT 10
+#define BALL_MOVEMENT 50
 #define	STARTOFWINDOW 0
 
 //ball movement directions
@@ -23,16 +23,17 @@ void AppControll::Construct()
 	_players.push_back(new Player());
 	_players.push_back(new Player());
 	_ball = new Ball();
-    _ball->setLeft(true);
-
+        _ball->setUp(true); //testovacie ucely
+        
 	_players[0]->Construct();
 	_players[1]->Construct();
 
 	_players[0]->SetName("Player1");
 	_players[1]->SetName("Player2");
 
-	InitPlayer(_players[0]);
-	InitPlayer(_players[1]);
+	InitPlayer(_players[0],0); 
+	InitPlayer(_players[1],1); 
+        
 }
 
 
@@ -53,8 +54,7 @@ void AppControll::Start()
 		//ReadFromClinet();
             cout << "----------------------------------------" << endl;
 		Update();
-		_socket->ReadFromClient();
-                _ball->setY(265);
+                //_ball->setY(265);
                 cout << "Pozicia Lopticky" << endl;
                 _ball->PrintYourSelf();
                 cout << "pozicia laveho hraca" << endl;
@@ -68,13 +68,17 @@ void AppControll::Start()
 	}
 }
 
-
-
-void AppControll::InitPlayer(Player * player)
+void AppControll::InitPlayer(Player * player, int number)
 {
-	player->setW(20);
-	player->setH(70);
-	player->setY(_h / 2 - player->getH() / 2);
+    player->setW(20);
+    player->setH(70);
+    player->setY(_h / 2 - player->getH() / 2);
+    
+    if (number == 0) {
+        player->setX(0);
+    } else {
+        player->setX(_w - player->getW());
+    }        
 }
 
 void AppControll::SendToClient()
@@ -110,16 +114,16 @@ void AppControll::UpdateBallPosition()
     
     if (_ball->getUp())
     {
-        //_ball->setY(_ball->getY() + BALL_MOVEMENT);
+        _ball->setY(_ball->getY() - BALL_MOVEMENT);
     } else {
-        //_ball->setY(_ball->getY() - BALL_MOVEMENT);
+        _ball->setY(_ball->getY() + BALL_MOVEMENT);
     }
     
     if (_ball->getLeft())
     {
-        _ball->setX(_ball->getX() - BALL_MOVEMENT);
+        //_ball->setX(_ball->getX() - BALL_MOVEMENT);
     } else {
-        _ball->setX(_ball->getX() + BALL_MOVEMENT);
+        //_ball->setX(_ball->getX() + BALL_MOVEMENT);
     }    
 }
 
@@ -144,7 +148,7 @@ void AppControll::DetectCollision()
         UpdateScoreOnClients();
         ResetBallPosition();
         cout << "Hit by Left wall" << endl;
-    } else if (_ball->getX() + _ball->getW() + BALL_MOVEMENT >= _h)
+    } else if (_ball->getX() + _ball->getW() + BALL_MOVEMENT >= _w)
     {
         //hit by right wall
         _score_left += 1;
@@ -156,11 +160,13 @@ void AppControll::DetectCollision()
         //hit by top wall
         _ball->setUp(false);
         _ball->setDown(true);
+        cout << "Hit by Top wall" << endl;
     }else if (_ball->getY() >= _h)
     {
         //hit by bottom wall
         _ball->setUp(true);
         _ball->setDown(false);
+        cout << "Hit by Bottom wall" << endl;
     }               
 }
 

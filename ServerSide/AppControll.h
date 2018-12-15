@@ -14,7 +14,7 @@ public:
 	void Construct();
 	void Destruct();
 	void Start();
-	void InitPlayer(Player * player);
+	void InitPlayer(Player * player, int number);
 
 private:
     
