@@ -58,6 +58,7 @@ void Game::Construct()
 	_players[1]->setX(_gameWindow->getW() - _players[1]->getW());
 
 
+
 }
 
 void Game::Destruct()
