@@ -17,6 +17,9 @@
     <ClCompile Include="Ball.cpp">
       <Filter>Pong</Filter>
     </ClCompile>
+    <ClCompile Include="Socket.cpp">
+      <Filter>Pong</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -53,6 +56,9 @@
     </ClInclude>
     <ClInclude Include="EventReciever.h">
       <Filter>Renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="Socket.h">
+      <Filter>Pong</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

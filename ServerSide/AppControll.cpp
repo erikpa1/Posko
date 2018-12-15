@@ -1,7 +1,7 @@
 #include "AppControll.h"
-#include "Socket.h"
 #include "Ball.h"
 #include "Player.h"
+#include "WindowsServer/WindowsServer/Socket.h"
 
 #define PLAYER_MOVEMENT 10
 #define BALL_MOVEMENT 10
@@ -19,11 +19,11 @@
 void AppControll::Construct()
 {
 	_socket = new Socket(123456);
-	//_socket->Consturct();
+	_socket->Construct();
 	_players.push_back(new Player());
 	_players.push_back(new Player());
 	_ball = new Ball();
-        _ball->setLeft(true);
+    _ball->setLeft(true);
 
 	_players[0]->Construct();
 	_players[1]->Construct();
@@ -53,6 +53,7 @@ void AppControll::Start()
 		//ReadFromClinet();
             cout << "----------------------------------------" << endl;
 		Update();
+		_socket->ReadFromClient();
                 _ball->setY(265);
                 cout << "Pozicia Lopticky" << endl;
                 _ball->PrintYourSelf();
@@ -82,10 +83,10 @@ void AppControll::SendToClient()
 
 }
 
-void AppControll::ReadFromClinet()
+void AppControll::ReadFromClient()
 {
 	cout << "Reading from clinets:" << endl;
-	cout << "Client has written: " << _socket->ReadFromClient() << endl;
+	cout << "Client has written: " << endl;
 }
 
 void AppControll::Update()

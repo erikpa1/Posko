@@ -2,6 +2,7 @@
 #include <vector>
 #include "EventReciever.h"
 #include <SDL.h>
+#include "Socket.h"
 
 class Window;
 class Player;
@@ -44,6 +45,8 @@ private:
 
 	//game score
 	std::pair<int, int> _score = { 0 ,0 };
+
+	Socket _socket;
 
 
 

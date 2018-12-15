@@ -5,7 +5,7 @@ int main()
 {
 	AppControll app;
 	app.Construct();
-	app.Destruct();
+	app.Start();
 	
 	return 0;
 }

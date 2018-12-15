@@ -57,7 +57,7 @@ void Game::Construct()
 	_players[0]->setX(0);	
 	_players[1]->setX(_gameWindow->getW() - _players[1]->getW());
 
-
+	_socket.Contruct();
 
 }
 
@@ -98,6 +98,8 @@ void Game::RecieveEvent(SDL_Event event)
 		{
 			case SDLK_UP:
 			ChangePosition(true, 10, 0);
+			_socket.SendToServer("Ahoj");
+
 			break;
 
 			case SDLK_DOWN:

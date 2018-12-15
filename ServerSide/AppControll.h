@@ -19,7 +19,7 @@ public:
 private:
     
 	void SendToClient();
-	void ReadFromClinet();
+	void ReadFromClient();
 	void Update();
         
         void ResetBallPosition();
