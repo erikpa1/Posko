@@ -15,7 +15,7 @@ using namespace std;
 
 Socket::Socket(int port)
 {
-	_port = port;
+	_port = 123456;
 }
 
 void Socket::Consturct()

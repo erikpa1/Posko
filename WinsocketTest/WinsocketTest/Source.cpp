@@ -23,9 +23,7 @@ int main()
 {
 	WSADATA wsaData;
 	SOCKET ConnectSocket = INVALID_SOCKET;
-	struct addrinfo *result = NULL,
-		*ptr = NULL,
-		hints;
+	struct addrinfo *result = NULL, *ptr = NULL, hints;
 	char sendbuf[DEFAULT_BUFLEN] = "this is a test";
 	char recvbuf[DEFAULT_BUFLEN];
 	int iResult;
@@ -46,7 +44,7 @@ int main()
 	hints.ai_family = AF_UNSPEC;
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = IPPROTO_TCP;
-
+	
 	// Resolve the server address and port
 	iResult = getaddrinfo("frios2.fri.uniza.sk", DEFAULT_PORT, &hints, &result);
 	if (iResult != 0) {
@@ -55,15 +53,14 @@ int main()
 		return iResult;
 	} else
 	{
-		cout << "GetAddrinfo success" << endl;
+		cout << "GetAddrinfo success"<< endl;
 	}
 
 	// Attempt to connect to an address until one succeeds
 	for (ptr = result; ptr != NULL; ptr = ptr->ai_next) {
 
 		// Create a SOCKET for connecting to server
-		ConnectSocket = socket(ptr->ai_family, ptr->ai_socktype,
-			ptr->ai_protocol);
+		ConnectSocket = socket(ptr->ai_family, ptr->ai_socktype, ptr->ai_protocol);
 		if (ConnectSocket == INVALID_SOCKET) {
 			cout << "socket failed with error: " << WSAGetLastError() << endl;
 			WSACleanup();

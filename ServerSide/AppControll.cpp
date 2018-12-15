@@ -19,7 +19,7 @@
 void AppControll::Construct()
 {
 	_socket = new Socket(123456);
-	//_socket->Consturct();
+	_socket->Consturct();
 	_players.push_back(new Player());
 	_players.push_back(new Player());
 	_ball = new Ball();
