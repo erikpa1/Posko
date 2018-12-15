@@ -11,3 +11,6 @@ Posko/FirstSDL/Debug/FirstSDL.log
 *.log
 *.log
 *.obj
+*.tlog
+*.idb
+*.tlog
