@@ -4,7 +4,7 @@
 #include "WindowsServer/WindowsServer/Socket.h"
 
 #define PLAYER_MOVEMENT 10
-#define BALL_MOVEMENT 50
+#define BALL_MOVEMENT 1
 #define	STARTOFWINDOW 0
 
 //ball movement directions
