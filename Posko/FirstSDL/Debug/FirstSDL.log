@@ -1,3 +1,8 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (FirstSDL.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   Game.cpp
+  Socket.cpp
+c:\users\samuel\documents\github\posko\posko\firstsdl\socket.cpp(9): warning C4305: 'argument': truncation from 'int' to 'unsigned short'
+c:\users\samuel\documents\github\posko\posko\firstsdl\socket.cpp(9): warning C4309: 'argument': truncation of constant value
+  Source.cpp
+  Generating Code...
   FirstSDL.vcxproj -> C:\Users\Samuel\Documents\GitHub\Posko\Posko\Debug\Posko.exe
