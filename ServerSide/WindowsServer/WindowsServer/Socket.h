@@ -3,6 +3,8 @@
 #include <thread>
 #include "SFML/Network.hpp"
 
+class NetworkReactor;
+
 class Socket
 {
 
@@ -15,14 +17,17 @@ public:
 	void Destruct();
 	void SendToClients(std::string data);
 	void ReadFromClient();
+	void SetReactor(NetworkReactor * reactor);
 
 
 private:
 
 	sf::TcpSocket _socket;
+	sf::TcpSocket _socket_sender;
 	sf::TcpListener _listener;
 	std::thread _thread;
 
+	NetworkReactor * _reactor;
 
 };
 

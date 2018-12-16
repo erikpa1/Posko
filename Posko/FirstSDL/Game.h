@@ -7,8 +7,9 @@
 class Window;
 class Player;
 class Ball;
+class NetworkReciever;
 
-class Game : public EventReciever
+class Game : public EventReciever, NetworkReciever
 {
 public:
 
@@ -17,6 +18,7 @@ public:
 	
 	void Start();
 	void Stop();
+	void RecieveMessage(std::string message) override;
 
 	void RecieveEvent(SDL_Event event) override;
 

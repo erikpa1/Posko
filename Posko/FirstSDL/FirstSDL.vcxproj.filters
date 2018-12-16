@@ -20,6 +20,7 @@
     <ClCompile Include="Socket.cpp">
       <Filter>Pong</Filter>
     </ClCompile>
+    <ClCompile Include="NetworkReciever.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -60,5 +61,6 @@
     <ClInclude Include="Socket.h">
       <Filter>Pong</Filter>
     </ClInclude>
+    <ClInclude Include="NetworkReciever.h" />
   </ItemGroup>
 </Project>

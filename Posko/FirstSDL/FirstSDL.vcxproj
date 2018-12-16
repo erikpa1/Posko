@@ -140,6 +140,7 @@
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="NetworkReciever.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Socket.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="EventReciever.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="NetworkReciever.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Renderable.h" />

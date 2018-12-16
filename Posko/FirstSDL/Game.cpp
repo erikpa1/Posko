@@ -57,6 +57,7 @@ void Game::Construct()
 	_players[0]->setX(0);	
 	_players[1]->setX(_gameWindow->getW() - _players[1]->getW());
 
+	_socket.SetNetworkReciever(this);
 	_socket.Contruct();
 
 }
@@ -88,9 +89,64 @@ void Game::Stop()
 
 }
 
+void Game::RecieveMessage(std::string message)
+{
+	cout << "Answer from server" << message << endl;
+
+	int x;
+	int y;
+
+	if (message.at(0) == 'B')
+	{
+	
+		int x_textsize = 0;
+		int x_lastfoundposition = 0;
+		for (int i = 2; i < 5; i++)
+		{
+			if (message.at(i) == ';')
+			{
+				x_lastfoundposition = i;
+				return;
+			} else
+			{
+				x_textsize++;
+			}	
+		}
+		int y_textsize = 0;
+		int y_lastfoundposition = 0;
+		for (int i = x_lastfoundposition+2; i < 2+x_lastfoundposition+3; i++)
+		{
+			if (message.at(i) == ';')
+			{
+				y_lastfoundposition = i;
+				return;
+			}
+			else
+			{
+				y_textsize++;
+			}
+		}
+
+		string x_final = string(message.substr(2, x_textsize)).c_str();
+		string y_final = string(message.substr(x_textsize + 3, y_textsize)).c_str();
+
+		x = stoi(x_final.c_str());
+		y = stoi(y_final.c_str());
+
+		_ball->setX(x);
+		_ball->setY(y);
+
+
+	}
+
+
+
+
+}
+
 void Game::RecieveEvent(SDL_Event event)
 {
-	std::cout << "Game prijala " << event.type << endl;
+	//std::cout << "Game prijala " << event.type << endl;
 	
 	if (event.type == SDL_KEYDOWN)
 	{
@@ -98,12 +154,12 @@ void Game::RecieveEvent(SDL_Event event)
 		{
 			case SDLK_UP:
 			ChangePosition(true, 10, 0);
-			_socket.SendToServer("Ahoj");
-
+			_socket.SendToServer("01");
 			break;
 
 			case SDLK_DOWN:
 			ChangePosition(false, 10, 0);
+			_socket.SendToServer("00");
 			break;			
 		}
 	}

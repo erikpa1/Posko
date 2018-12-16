@@ -20,6 +20,8 @@ void AppControll::Construct()
 {
 	_socket = new Socket(123456);
 	_socket->Construct();
+	_socket->SetReactor(this);
+
 	_players.push_back(new Player());
 	_players.push_back(new Player());
 	_ball = new Ball();
@@ -53,6 +55,7 @@ void AppControll::Start()
 
 		//ReadFromClinet();
             cout << "----------------------------------------" << endl;
+
 		Update();
                 //_ball->setY(265);
                 cout << "Pozicia Lopticky" << endl;
@@ -98,6 +101,8 @@ void AppControll::Update()
     cout << "Updating states" << endl;
     UpdateBallPosition();
     DetectCollision();
+
+	_socket->SendToClients("B;" + to_string(_ball->getX()) + ";" + to_string(_ball->getY()) + ";");
            
 }
 
@@ -193,5 +198,22 @@ void AppControll::UpdatePlayer(bool up, int amount, int playerChoose)
 void AppControll::UpdateScoreOnClients()
 {
     
+}
+
+void AppControll::RecieveMessage(std::string message)
+{
+	cout << "Message recieved" << message << endl;
+
+	int player = atoi(string(message.substr(0,0)).c_str());
+	bool direction = false;
+
+	if (message.at(1) == '1')
+	{
+		cout << "Player is going up" << endl;
+		direction = true;
+	}
+
+	this->UpdatePlayer(player, PLAYER_MOVEMENT, player);
+
 }
 

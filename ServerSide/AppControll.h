@@ -1,12 +1,13 @@
 #pragma once
 #include <vector>
 #include <iostream>
+#include "WindowsServer/WindowsServer/NetworkReactor.h"
 
 class Socket;
 class Player;
 class Ball;
 
-class AppControll
+class AppControll : public NetworkReactor
 {
 
 public:
@@ -22,11 +23,13 @@ private:
 	void ReadFromClient();
 	void Update();
         
-        void ResetBallPosition();
-        void UpdateBallPosition();
-        void UpdatePlayer(bool up, int amount, int playerChoose);
-        void DetectCollision();
-        void UpdateScoreOnClients();
+    void ResetBallPosition();
+    void UpdateBallPosition();
+    void UpdatePlayer(bool up, int amount, int playerChoose);
+    void DetectCollision();
+    void UpdateScoreOnClients();
+
+	void RecieveMessage(std::string message) override;
         
         
 private:

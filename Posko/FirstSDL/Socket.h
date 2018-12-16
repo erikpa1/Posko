@@ -1,21 +1,26 @@
 ﻿#pragma once
 #include <string>
 #include "SFML/Network.hpp"
+#include "NetworkReciever.h"
+#include <thread>
 
 
-class Socket
+class Socket 
 {
 public:
 
 	void Contruct();
 	void Destruct();
-	void SendToServer(std::string data);
-	void SetApp(void * app);
-
+	void SendToServer(std::string data);	
+	void SetNetworkReciever(NetworkReciever * reciever);
+	void ReadFromServer();
+	
 private:
 
-	void * _app;
+	NetworkReciever * _reactor;
+	sf::TcpListener _listener;
 	sf::TcpSocket _socket;
-	
+
+	std::thread _thread;
 	
 };

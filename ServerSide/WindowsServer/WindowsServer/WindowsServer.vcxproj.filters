@@ -43,5 +43,8 @@
     <ClInclude Include="Socket.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="NetworkReactor.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
