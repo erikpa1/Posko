@@ -51,25 +51,35 @@ void AppControll::Destruct()
 
 void AppControll::Start()
 {
-	while (true)
+	while (_score_left < 10 || _score_right < 10)
 	{
 		//cout << "Server started running cycle" << endl;
 
 		//ReadFromClinet();
-        cout << "----------------------------------------" << endl;
-
+		cout << "----------------------------------------" << endl;
+		cout << "Score left: " << _score_left << endl;
+		cout << "Score right: " << _score_right << endl;
 		Update();
-		//_ball->setY(265);
-		cout << "Pozicia Lopticky" << endl;
-		_ball->PrintYourSelf();
-		cout << "pozicia laveho hraca" << endl;
-		_players[0]->PrintYourSelf();
-		cout << "pozicia praveho hraca" << endl;
-		_players[1]->PrintYourSelf();
+        
+        cout << "Pozicia Lopticky" << endl;
+        _ball->PrintYourSelf();
+        cout << "pozicia laveho hraca" << endl;
+        _players[0]->PrintYourSelf();
+        cout << "pozicia praveho hraca" << endl;
+        _players[1]->PrintYourSelf();
 		//SendToClient();
 
-
 		//cout << "Server ended running running cycle" << endl;
+	}
+
+	cout << "Game Over" << endl;
+	if (_score_left == 10)
+	{
+		cout << "The winner is left Player!" << endl;
+	}
+	else
+	{
+		cout << "The winner is right Player!" << endl;
 	}
 }
 
@@ -100,7 +110,6 @@ void AppControll::ReadFromClient()
 
 void AppControll::Update()
 {
-    cout << "Updating states" << endl;
     UpdateBallPosition();
     DetectCollision();
 	_socket->SendToClients("B;" + to_string(_ball->getX()) + ";" + to_string(_ball->getY()) + ";");
@@ -190,22 +199,21 @@ void AppControll::DetectCollision()
 
 void AppControll::UpdatePlayer(bool up, int amount, int playerChoose)
 {
-    auto helper = _players[playerChoose];
+    auto helper = _players[0];
 
 	if(up)
 	{
-		if ((helper->getY() - PLAYER_MOVEMENT) >= STARTOFWINDOW)
-		{
-			helper->setY(helper->getY() - PLAYER_MOVEMENT);
-		}            
+            if ((helper->getY() - PLAYER_MOVEMENT) >= STARTOFWINDOW)
+            {
+            	helper->setY(helper->getY() - PLAYER_MOVEMENT);
+            }
 	}
 	else
 	{
-		if ((helper->getY() + helper->getH() + PLAYER_MOVEMENT) <= _h)
-		{
-			helper->setY(helper->getY() + PLAYER_MOVEMENT);
-		}            	
-	}       
+            if ((helper->getY() + helper->getH() + PLAYER_MOVEMENT) <= _h)
+            {
+		helper->setY(helper->getY() + PLAYER_MOVEMENT);
+            }	}       
     
 }
 
@@ -216,10 +224,9 @@ void AppControll::UpdateScoreOnClients()
 
 void AppControll::RecieveMessage(std::string message)
 {
-	cout << "Message recieved " << message << endl;
+	cout << "Message recieved" << message << endl;
 
-	
-	int player = message.at(0) - 48;
+	int player = atoi(string(message.substr(0,0)).c_str());
 	bool direction = false;
 
 	if (message.at(1) == '1')
@@ -228,11 +235,7 @@ void AppControll::RecieveMessage(std::string message)
 		direction = true;
 	}
 
-	cout << "Player number " << player << endl;
-
-	
-
-	this->UpdatePlayer(direction, PLAYER_MOVEMENT+10, player);
+	this->UpdatePlayer(player, PLAYER_MOVEMENT, player);
 
 }
 
