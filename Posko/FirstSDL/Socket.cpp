@@ -2,11 +2,14 @@
 #include "Game.h"
 #include <iostream>
 
+#define SERVER "frios2.fri.uniza.sk" //127.0.0.1
+#define PORT 12356  //123456
+
 using namespace std;
 
 void Socket::Contruct()
 {
-	if (_socket.connect("127.0.0.1", 123456) != sf::TcpSocket::Done)
+	if (_socket.connect(SERVER, PORT) != sf::TcpSocket::Done)
 	{
 		cout << "Failed to connect on socket" << endl;
 	} else
@@ -43,11 +46,12 @@ void Socket::ReadFromServer()
 	cout << "Server is going to read from client" << endl;
 	while (true)
 	{
-		cout << "Client connected, his adress " << _socket.getRemoteAddress() << endl;
+		
+		//cout << "Client connected, his adress " << _socket.getRemoteAddress() << endl;
 		if (_socket.receive(data, 255, recieveddata) == sf::Socket::Done)
 		{
 			cout << "Client poslal: " << string(data) << endl;
-			_reactor->RecieveMessage(string(data));
+			//_reactor->RecieveMessage(string(data));
 		}
 	}
 }

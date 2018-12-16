@@ -1,28 +1,18 @@
 ﻿#include "Socket.h"
-
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <unistd.h>
-#include <netinet/in.h>
-#include <iostream>
+        
+#define SERVER "frios2.fri.uniza.sk" //127.0.0.1
+#define PORT 12356  //123456
 
 using namespace std;
 
 Socket::Socket(int port)
 {
-	_port = 123456;
+	_port = PORT;
 }
-
-void Socket::Consturct()
-{
-	socklen_t cli_len;	
-	struct sockaddr_in serv_addr, cli_addr;
-	
+ 
+void Socket::Construct()
+{	 
+		
 	bzero((char*)&serv_addr, sizeof(serv_addr)); 
 		serv_addr.sin_family = AF_INET;
 	serv_addr.sin_addr.s_addr = INADDR_ANY;
@@ -46,19 +36,48 @@ void Socket::Consturct()
 	{
 		cout << "Adress initialized" << endl;
 	}
+        
+        _myThread = thread(&Socket::ReadFromClient, this);        
+        _inited = true;
+       
+        	
+}
 
-	listen(_sockfd, 5); 
-	cli_len = sizeof(cli_addr);
+void Socket::ReadFromClient()
+{      
+    listen(_sockfd, 5); 
+    cli_len = sizeof(cli_addr);
 
-	cout << "Going to accept" << endl;
-	_newsockfd = accept(_sockfd, (struct sockaddr*)&cli_addr, &cli_len);
-	if (_newsockfd < 0)
-	{
-		cout << "ERROR on accept" << endl;
-	} else
-	{
-		cout << "Socket accepted" << endl;
-	}
+    cout << "Going to accept" << endl;
+    _newsockfd = accept(_sockfd, (struct sockaddr*)&cli_addr, &cli_len);
+    if (_newsockfd < 0)
+    {
+        cout << "ERROR on accept" << endl;
+    } else
+    {
+        cout << "Socket accepted" << endl;
+    }
+    
+    
+    while (true)
+    {
+        char buffer[256];       
+        bzero(buffer,256);
+        
+        int n = read(_newsockfd, buffer, 255);
+        
+        string message = buffer;        
+        _reactor->RecieveMessage(message);
+                
+    }
+        
+    
+    
+}
+
+void Socket::SetReactor(NetworkReactor* reactor)
+{
+    _reactor = reactor;
 }
 
 void Socket::Destruct()
@@ -69,25 +88,14 @@ void Socket::Destruct()
 
 void Socket::SendToClients(std::string data)
 {	
-	int ret = write(_newsockfd, data.c_str(), data.length());
-	if (ret < 0)
-	{
-		perror("Error writing to socket");
-	}
-}
-
-std::string Socket::ReadFromClient()
-{
-	std::string clientMessage;	
-	char buffer[256];
-	
-	int ret = read(_newsockfd, buffer, 256);
-	if (ret < 0)
-	{
-		perror("Error reading from socket");
-	}
-
-	clientMessage = buffer;
-	
-	return clientMessage;
+    if (_inited)
+    {
+        int ret = write(_newsockfd, data.c_str(), data.length());
+        if (ret < 0)
+        {
+            perror("Error writing to socket");
+        } else {
+            cout << "Server written: " << data << endl;
+        }
+    }	
 }

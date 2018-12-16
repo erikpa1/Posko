@@ -1,8 +1,8 @@
 #include "AppControll.h"
 #include "Ball.h"
 #include "Player.h"
-#include "WindowsServer/WindowsServer/Socket.h"
-
+//#include "WindowsServer/WindowsServer/Socket.h"
+#include "Socket.h"
 
 #define PLAYER_MOVEMENT 20
 #define BALL_MOVEMENT 1
@@ -19,7 +19,7 @@
 
 void AppControll::Construct()
 {
-	_socket = new Socket(123456);
+	_socket = new Socket(12356);
 	_socket->Construct();
 	_socket->SetReactor(this);
 
@@ -53,23 +53,15 @@ void AppControll::Start()
 {
 	while (true)
 	{
-		//cout << "Server started running cycle" << endl;
-
-		//ReadFromClinet();
-        cout << "----------------------------------------" << endl;
-
-		Update();
-		//_ball->setY(265);
-		cout << "Pozicia Lopticky" << endl;
-		_ball->PrintYourSelf();
-		cout << "pozicia laveho hraca" << endl;
-		_players[0]->PrintYourSelf();
-		cout << "pozicia praveho hraca" << endl;
-		_players[1]->PrintYourSelf();
-		//SendToClient();
-
-
-		//cout << "Server ended running running cycle" << endl;
+            cout << "----------------------------------------" << endl;
+            Update();		
+            cout << "Pozicia Lopticky" << endl;
+            _ball->PrintYourSelf();
+            cout << "pozicia laveho hraca" << endl;
+            _players[0]->PrintYourSelf();
+            cout << "pozicia praveho hraca" << endl;
+            _players[1]->PrintYourSelf();	               	
+		
 	}
 }
 
@@ -89,7 +81,6 @@ void AppControll::InitPlayer(Player * player, int number)
 void AppControll::SendToClient()
 {
 	cout << "Sending to clients" << endl;
-
 }
 
 void AppControll::ReadFromClient()
@@ -108,7 +99,7 @@ void AppControll::Update()
 	message += "P;" + to_string(_players[1]->getX()) + ";" + to_string(_players[1]->getY()) + ";";	
 	_socket->SendToClients(message);
 		
-	std::this_thread::sleep_for(chrono::microseconds(50));
+	std::this_thread::sleep_for(chrono::microseconds(500));
 }
 
 void AppControll::ResetBallPosition()
