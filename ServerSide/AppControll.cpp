@@ -51,18 +51,34 @@ void AppControll::Destruct()
 
 void AppControll::Start()
 {
-	while (true)
+	while (_score_left < 10 || _score_right < 10)
 	{
-            cout << "----------------------------------------" << endl;
-            Update();		
-            cout << "Pozicia Lopticky" << endl;
-            _ball->PrintYourSelf();
-            cout << "pozicia laveho hraca" << endl;
-            _players[0]->PrintYourSelf();
-            cout << "pozicia praveho hraca" << endl;
-            _players[1]->PrintYourSelf();	               	
+		//cout << "Server started running cycle" << endl;
+		Update();
+		//ReadFromClinet();
+        cout << "----------------------------------------" << endl;
+		cout << "Pozicia Lopticky" << endl;
+		_ball->PrintYourSelf();
+		cout << "pozicia laveho hraca" << endl;
+		_players[0]->PrintYourSelf();
+		cout << "pozicia praveho hraca" << endl;
+		_players[1]->PrintYourSelf();
 		
+		//SendToClient();
+		//cout << "Server ended running running cycle" << endl;
 	}
+
+	cout << "Game Over" << endl;
+	
+	if (_score_left == 10)
+	{
+		cout << "The winner is Left Player!" << endl;
+	} else
+	{
+		cout << "the winner is Right Player!" << endl;
+	}
+
+	system("pause");
 }
 
 void AppControll::InitPlayer(Player * player, int number)
@@ -125,7 +141,7 @@ void AppControll::UpdateBallPosition()
 
     if (_ball->getUp())
     {	
-		_ball->setY(_ball->getY() - BALL_MOVEMENT);// randomAngle);
+		_ball->setY(_ball->getY() - BALL_MOVEMENT);
     } else {
         _ball->setY(_ball->getY() + BALL_MOVEMENT);
     }
@@ -158,16 +174,19 @@ void AppControll::DetectCollision()
     {
         //hit by left wall
         _score_right += 1;
+
 		messageToClient = "R1";
-        UpdateScoreOnClients();
+
         ResetBallPosition();
         cout << "Hit by Left wall" << endl;
     } else if (_ball->getX() + _ball->getW() + BALL_MOVEMENT >= _w)
     {
         //hit by right wall
         _score_left += 1;
+
 		messageToClient = "R0";
-        UpdateScoreOnClients();
+
+
         ResetBallPosition();
         cout << "Hit by Right wall" << endl;
     } else if (_ball->getY() <= STARTOFWINDOW)
@@ -209,11 +228,6 @@ void AppControll::UpdatePlayer(bool up, int amount, int playerChoose)
 			helper->setY(helper->getY() + PLAYER_MOVEMENT);
 		}            	
 	}       
-    
-}
-
-void AppControll::UpdateScoreOnClients()
-{
     
 }
 
