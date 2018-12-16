@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include "WindowsServer/WindowsServer/NetworkReactor.h"
+#include  <stdlib.h>
 
 class Socket;
 class Player;
@@ -37,7 +38,8 @@ private:
 	int _h = 600;
         int _score_left = 0;
         int _score_right = 0;
-        
+		int playersTurn;
+
 	Socket * _socket;
 	Ball * _ball;
 
