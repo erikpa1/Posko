@@ -13,6 +13,10 @@ void Rectangle::Construct()
 {
 	_source = new SDL_Rect();
 	_color = new vec4();
+	_color->x = 255;
+	_color->y = 255;
+	_color->z = 255;
+	_color->w = 255;
 	
 }
 
@@ -30,7 +34,7 @@ void Rectangle::Update()
 void Rectangle::Draw()
 {
 	Renderable::Draw();
-	SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(_renderer, _color->x, _color->y, _color->z, _color->w);
 	SDL_RenderFillRect(_renderer, _source);
 	//SDL_RenderPresent(_renderer);
 }

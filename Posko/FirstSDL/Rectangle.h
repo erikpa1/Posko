@@ -24,6 +24,7 @@ public:
 
 	void SetColor(const vec4 & color);
 	
+	
 private:
 
 	SDL_Rect* _source = nullptr;

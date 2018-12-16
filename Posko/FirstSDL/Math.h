@@ -8,6 +8,7 @@ public:
 	int y;
 	int z;
 	int w;
+	
 
 	vec4 vec4plus(const vec4 & a, const vec4 & b)
 	{

@@ -1,5 +1,6 @@
 ﻿#include "Player.h"
 #include "Rectangle.h"
+#include "Math.h"
 
 Player::Player()
 {
@@ -65,4 +66,15 @@ void Player::Draw()
 void Player::Update()
 {
 
+}
+
+void Player::SetRandomColor()
+{
+	vec4 color;
+	color.x = 150 + rand() % 100;
+	color.y = 150 + rand() % 100;
+	color.z = 150 + rand() % 100;
+	color.x = 150 + rand() % 100;
+
+	_reprezentation->SetColor(color);
 }

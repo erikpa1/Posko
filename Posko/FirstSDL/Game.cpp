@@ -87,6 +87,17 @@ void Game::RecieveMessage(std::string message)
 {
 	sf::Vector2i position;
 
+	if (message.at(0) == 'R')
+	{
+		_ball->SetRandomColor();
+		if (message.at(1) == '0')
+		{
+			_players[0]->SetRandomColor();
+		} else
+		{
+			_players[1]->SetRandomColor();
+		}
+	}
 	
 	if (message.at(0) == 'B')
 	{
@@ -165,24 +176,22 @@ void Game::RecieveEvent(SDL_Event event)
 	{
 		switch(event.key.keysym.sym)
 		{
-			case SDLK_UP:
-			//ChangePosition(true, 10, 1);
+			case SDLK_UP:			
 			_socket.SendToServer("11");
 			break;
-			case SDLK_DOWN:
-			//ChangePosition(false, 10, 1);
+			case SDLK_DOWN:			
 			_socket.SendToServer("10");
-			break;
-			case SDLK_w:
-			//ChangePosition(true, 10, 0);
+			break;			
+		}
+
+		switch(event.key.keysym.sym)
+		{
+			case SDLK_w:			
 			_socket.SendToServer("01");
 			break;
 			case SDLK_s:
-			_socket.SendToServer("00");
-			//ChangePosition(false, 10, 0);
+			_socket.SendToServer("00");			
 			break;
-
-
 		}
 	}
 

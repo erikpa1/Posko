@@ -1,5 +1,6 @@
 #include "Ball.h"
 #include "Rectangle.h"
+#include "Math.h"
 
 Ball::Ball()
 {
@@ -94,6 +95,17 @@ void Ball::SetRenderer(SDL_Renderer * renderer)
 void Ball::SetName(std::string name)
 {
 	_reprezentation->SetName("Reprezentation of " + name);
+}
+
+void Ball::SetRandomColor()
+{
+	vec4 color;
+	color.x = 150+ rand() % 100;
+	color.y = 150+ rand() % 100;
+	color.z = 150+ rand() % 100;
+	color.x = 150+ rand() % 100;
+	
+	_reprezentation->SetColor(color);
 }
 
 void Ball::Draw()
