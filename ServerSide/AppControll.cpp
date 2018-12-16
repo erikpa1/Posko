@@ -3,9 +3,12 @@
 #include "Player.h"
 #include "WindowsServer/WindowsServer/Socket.h"
 
-
 #define PLAYER_MOVEMENT 10
+<<<<<<< HEAD
 #define BALL_MOVEMENT 20
+=======
+#define BALL_MOVEMENT 50
+>>>>>>> 74f3685288a1398c2ab5abe4b9ac1bbba00c65f7
 #define	STARTOFWINDOW 0
 
 //ball movement directions
@@ -56,6 +59,7 @@ void AppControll::Start()
 		//cout << "Server started running cycle" << endl;
 
 		//ReadFromClinet();
+<<<<<<< HEAD
 		cout << "----------------------------------------" << endl;
 		cout << "Score left: " << _score_left << endl;
 		cout << "Score right: " << _score_right << endl;
@@ -67,6 +71,18 @@ void AppControll::Start()
         _players[0]->PrintYourSelf();
         cout << "pozicia praveho hraca" << endl;
         _players[1]->PrintYourSelf();
+=======
+        cout << "----------------------------------------" << endl;
+
+		Update();
+		//_ball->setY(265);
+		cout << "Pozicia Lopticky" << endl;
+		_ball->PrintYourSelf();
+		cout << "pozicia laveho hraca" << endl;
+		_players[0]->PrintYourSelf();
+		cout << "pozicia praveho hraca" << endl;
+		_players[1]->PrintYourSelf();
+>>>>>>> 74f3685288a1398c2ab5abe4b9ac1bbba00c65f7
 		//SendToClient();
 
 		//cout << "Server ended running running cycle" << endl;
@@ -104,6 +120,8 @@ void AppControll::Update()
     DetectCollision();
 
 	_socket->SendToClients("B;" + to_string(_ball->getX()) + ";" + to_string(_ball->getY()) + ";");
+	_socket->SendToClients("0;" + to_string(_players[0]->getX()) + ";" + to_string(_players[0]->getY()) + ";");
+	_socket->SendToClients("1;" + to_string(_players[1]->getX()) + ";" + to_string(_players[1]->getY()) + ";");
            
 }
 
@@ -188,21 +206,22 @@ void AppControll::DetectCollision()
 
 void AppControll::UpdatePlayer(bool up, int amount, int playerChoose)
 {
-    auto helper = _players[0];
+    auto helper = _players[playerChoose];
 
 	if(up)
 	{
-            if ((helper->getY() - PLAYER_MOVEMENT) >= STARTOFWINDOW)
-            {
-            	helper->setY(helper->getY() - PLAYER_MOVEMENT);
-            }
+		if ((helper->getY() - PLAYER_MOVEMENT) >= STARTOFWINDOW)
+		{
+			helper->setY(helper->getY() - PLAYER_MOVEMENT);
+		}            
 	}
 	else
 	{
-            if ((helper->getY() + helper->getH() + PLAYER_MOVEMENT) <= _h)
-            {
-		helper->setY(helper->getY() + PLAYER_MOVEMENT);
-            }	}       
+		if ((helper->getY() + helper->getH() + PLAYER_MOVEMENT) <= _h)
+		{
+			helper->setY(helper->getY() + PLAYER_MOVEMENT);
+		}            	
+	}       
     
 }
 
@@ -213,9 +232,10 @@ void AppControll::UpdateScoreOnClients()
 
 void AppControll::RecieveMessage(std::string message)
 {
-	cout << "Message recieved" << message << endl;
+	cout << "Message recieved " << message << endl;
 
-	int player = atoi(string(message.substr(0,0)).c_str());
+	
+	int player = message.at(0) - 48;
 	bool direction = false;
 
 	if (message.at(1) == '1')
@@ -224,7 +244,11 @@ void AppControll::RecieveMessage(std::string message)
 		direction = true;
 	}
 
-	this->UpdatePlayer(player, PLAYER_MOVEMENT, player);
+	cout << "Player number " << player << endl;
+
+	
+
+	this->UpdatePlayer(direction, PLAYER_MOVEMENT+10, player);
 
 }
 

@@ -46,17 +46,11 @@ void Game::Construct()
 	_ball->setW(10);
 	_ball->setH(10);
 
-	_ball->setX(_gameWindow->getH() / 2 - _ball->getH() / 2);
-	_ball->setY(_gameWindow->getW() / 2 - _ball->getW() / 2);
-
 	_gameWindow->AddChildren(_players[0]);
 	_gameWindow->AddChildren(_players[1]);
 	_gameWindow->AddChildren(_ball);
 	_gameWindow->AddEventRecievers(this);
-		
-	_players[0]->setX(0);	
-	_players[1]->setX(_gameWindow->getW() - _players[1]->getW());
-
+	
 	_socket.SetNetworkReciever(this);
 	_socket.Contruct();
 
@@ -91,57 +85,66 @@ void Game::Stop()
 
 void Game::RecieveMessage(std::string message)
 {
-	cout << "Answer from server" << message << endl;
+	sf::Vector2i position;
 
+	position = ExtractPosition(message);
+	if (message.at(0) == 'B')
+	{
+		_ball->setX(position.x);
+		_ball->setY(position.y);
+	}
+	if (message.at(0) == '0' || message.at(0) == '1')
+	{
+		int player = message.at(0) == '0' ? 0 : 1;
+		_players[player]->setX(position.x);
+		_players[player]->setY(position.y);
+	}
+}
+
+sf::Vector2i Game::ExtractPosition(std::string message)
+{
 	int x;
 	int y;
 
-	if (message.at(0) == 'B')
+	int x_textsize = 0;
+	int x_lastfoundposition = 0;
+	for (int i = 2; i < 5; i++)
 	{
-	
-		int x_textsize = 0;
-		int x_lastfoundposition = 0;
-		for (int i = 2; i < 5; i++)
+		if (message.at(i) == ';')
 		{
-			if (message.at(i) == ';')
-			{
-				x_lastfoundposition = i;
-				return;
-			} else
-			{
-				x_textsize++;
-			}	
+			x_lastfoundposition = i;
+			break;
 		}
-		int y_textsize = 0;
-		int y_lastfoundposition = 0;
-		for (int i = x_lastfoundposition+2; i < 2+x_lastfoundposition+3; i++)
+		else
 		{
-			if (message.at(i) == ';')
-			{
-				y_lastfoundposition = i;
-				return;
-			}
-			else
-			{
-				y_textsize++;
-			}
+			x_textsize++;
 		}
-
-		string x_final = string(message.substr(2, x_textsize)).c_str();
-		string y_final = string(message.substr(x_textsize + 3, y_textsize)).c_str();
-
-		x = stoi(x_final.c_str());
-		y = stoi(y_final.c_str());
-
-		_ball->setX(x);
-		_ball->setY(y);
-
-
+	}
+	int y_textsize = 0;
+	int y_lastfoundposition = 0;
+	for (int i = x_lastfoundposition + 2; i < 2 + x_lastfoundposition + 3; i++)
+	{
+		if (message.at(i) == ';')
+		{
+			y_lastfoundposition = i;
+			break;
+		}
+		else
+		{
+			y_textsize++;
+		}
 	}
 
+	string x_final = string(message.substr(2, x_textsize)).c_str();
+	string y_final = string(message.substr(x_textsize + 3, y_textsize)).c_str();
 
 
+	x = stoi(x_final.c_str());
+	y = stoi(y_final.c_str());
 
+	return sf::Vector2i(x, y);
+
+		
 }
 
 void Game::RecieveEvent(SDL_Event event)
@@ -153,14 +156,23 @@ void Game::RecieveEvent(SDL_Event event)
 		switch(event.key.keysym.sym)
 		{
 			case SDLK_UP:
-			ChangePosition(true, 10, 0);
+			//ChangePosition(true, 10, 1);
+			_socket.SendToServer("11");
+			break;
+			case SDLK_DOWN:
+			//ChangePosition(false, 10, 1);
+			_socket.SendToServer("10");
+			break;
+			case SDLK_w:
+			//ChangePosition(true, 10, 0);
 			_socket.SendToServer("01");
 			break;
-
-			case SDLK_DOWN:
-			ChangePosition(false, 10, 0);
+			case SDLK_s:
 			_socket.SendToServer("00");
-			break;			
+			//ChangePosition(false, 10, 0);
+			break;
+
+
 		}
 	}
 
@@ -176,7 +188,7 @@ void Game::InitPlayer(Player* player)
 
 void Game::ChangePosition(bool up, int amount, int playerChoose)
 {
-	auto helper = _players[0];
+	auto helper = _players[playerChoose];
 
 	if(up)
 	{

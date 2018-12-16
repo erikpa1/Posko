@@ -20,6 +20,8 @@ public:
 	void Stop();
 	void RecieveMessage(std::string message) override;
 
+	sf::Vector2i ExtractPosition(std::string position);
+
 	void RecieveEvent(SDL_Event event) override;
 
 

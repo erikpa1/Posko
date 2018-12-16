@@ -36,10 +36,10 @@ private:
 private:
 	int _w = 800;
 	int _h = 600;
-        int _score_left = 0;
-        int _score_right = 0;
-		int playersTurn;
-
+    int _score_left = 0;
+    int _score_right = 0;
+	int playersTurn;
+        
 	Socket * _socket;
 	Ball * _ball;
 
