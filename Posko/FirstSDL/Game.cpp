@@ -7,7 +7,7 @@
 
 
 #define PLAYER_MOVEMENT 10
-#define BALL_MOVEMENT 2
+#define BALL_MOVEMENT 1
 #define	STARTOFWINDOW 0
 
 //ball movement directions
