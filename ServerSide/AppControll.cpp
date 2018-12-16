@@ -4,7 +4,7 @@
 #include "WindowsServer/WindowsServer/Socket.h"
 
 
-#define PLAYER_MOVEMENT 10
+#define PLAYER_MOVEMENT 20
 #define BALL_MOVEMENT 1
 #define	STARTOFWINDOW 0
 
@@ -124,6 +124,7 @@ void AppControll::ResetBallPosition()
 	}
     _ball->setX(_w / 2);
     _ball->setY(_h / 2);
+	
 }
 
 void AppControll::UpdateBallPosition()
@@ -148,6 +149,7 @@ void AppControll::UpdateBallPosition()
 
 void AppControll::DetectCollision()
 {
+	string messageToClient = "";
     
     if (_ball->getX() - BALL_MOVEMENT <= _players[0]->getX() + _players[0]->getW() &&
     _ball->getY() > _players[0]->getY() && _ball->getY() < _players[0]->getY()+_players[0]->getH())
@@ -165,6 +167,7 @@ void AppControll::DetectCollision()
     {
         //hit by left wall
         _score_right += 1;
+		messageToClient = "R1";
         UpdateScoreOnClients();
         ResetBallPosition();
         cout << "Hit by Left wall" << endl;
@@ -172,6 +175,7 @@ void AppControll::DetectCollision()
     {
         //hit by right wall
         _score_left += 1;
+		messageToClient = "R0";
         UpdateScoreOnClients();
         ResetBallPosition();
         cout << "Hit by Right wall" << endl;
@@ -187,7 +191,13 @@ void AppControll::DetectCollision()
         _ball->setUp(true);
         _ball->setDown(false);
         cout << "Hit by Bottom wall" << endl;
-    }               
+    }
+
+	if (messageToClient != "")
+	{
+		_socket->SendToClients(messageToClient);
+	}
+
 }
 
 void AppControll::UpdatePlayer(bool up, int amount, int playerChoose)

@@ -19,7 +19,7 @@ public:
 	void setH(int h) override;
 	void SetRenderer(SDL_Renderer* renderer) override;
 	void SetName(std::string name) override;
-
+	void SetRandomColor();
 
 	void Draw() override;
 

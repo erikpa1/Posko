@@ -35,6 +35,8 @@ public:
 
 	virtual void SetRenderer(SDL_Renderer * renderer);
 
+	
+
 protected:
 
 	int _x = 0;
@@ -49,6 +51,8 @@ protected:
 
 	
 };
+
+
 
 inline void Renderable::Draw()
 {
