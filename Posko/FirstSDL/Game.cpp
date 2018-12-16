@@ -90,7 +90,7 @@ void Game::RecieveMessage(std::string message)
 	if (message.at(0) == 'R')
 	{
 		_ball->SetRandomColor();
-		if (message.at(1) == 0)
+		if (message.at(1) == '0')
 		{
 			_players[0]->SetRandomColor();
 		} else
