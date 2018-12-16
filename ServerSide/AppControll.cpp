@@ -51,26 +51,34 @@ void AppControll::Destruct()
 
 void AppControll::Start()
 {
-	while (true)
+	while (_score_left < 10 || _score_right < 10)
 	{
 		//cout << "Server started running cycle" << endl;
-
+		Update();
 		//ReadFromClinet();
         cout << "----------------------------------------" << endl;
-
-		Update();
-		//_ball->setY(265);
 		cout << "Pozicia Lopticky" << endl;
 		_ball->PrintYourSelf();
 		cout << "pozicia laveho hraca" << endl;
 		_players[0]->PrintYourSelf();
 		cout << "pozicia praveho hraca" << endl;
 		_players[1]->PrintYourSelf();
+		
 		//SendToClient();
-
-
 		//cout << "Server ended running running cycle" << endl;
 	}
+
+	cout << "Game Over" << endl;
+	
+	if (_score_left == 10)
+	{
+		cout << "The winner is Left Player!" << endl;
+	} else
+	{
+		cout << "the winner is Right Player!" << endl;
+	}
+
+	system("pause");
 }
 
 void AppControll::InitPlayer(Player * player, int number)
@@ -167,22 +175,19 @@ void AppControll::DetectCollision()
     {
         //hit by left wall
         _score_right += 1;
-<<<<<<< HEAD
-=======
+
 		messageToClient = "R1";
-        UpdateScoreOnClients();
->>>>>>> 3d6f690dede87ad34acd40941c55868deec0dd35
+
         ResetBallPosition();
         cout << "Hit by Left wall" << endl;
     } else if (_ball->getX() + _ball->getW() + BALL_MOVEMENT >= _w)
     {
         //hit by right wall
         _score_left += 1;
-<<<<<<< HEAD
-=======
+
 		messageToClient = "R0";
-        UpdateScoreOnClients();
->>>>>>> 3d6f690dede87ad34acd40941c55868deec0dd35
+
+
         ResetBallPosition();
         cout << "Hit by Right wall" << endl;
     } else if (_ball->getY() <= STARTOFWINDOW)
