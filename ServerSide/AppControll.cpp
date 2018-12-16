@@ -133,7 +133,7 @@ void AppControll::UpdateBallPosition()
 
     if (_ball->getUp())
     {	
-		_ball->setY(_ball->getY() - BALL_MOVEMENT);// randomAngle);
+		_ball->setY(_ball->getY() - BALL_MOVEMENT);
     } else {
         _ball->setY(_ball->getY() + BALL_MOVEMENT);
     }
@@ -165,14 +165,12 @@ void AppControll::DetectCollision()
     {
         //hit by left wall
         _score_right += 1;
-        UpdateScoreOnClients();
         ResetBallPosition();
         cout << "Hit by Left wall" << endl;
     } else if (_ball->getX() + _ball->getW() + BALL_MOVEMENT >= _w)
     {
         //hit by right wall
         _score_left += 1;
-        UpdateScoreOnClients();
         ResetBallPosition();
         cout << "Hit by Right wall" << endl;
     } else if (_ball->getY() <= STARTOFWINDOW)
@@ -208,11 +206,6 @@ void AppControll::UpdatePlayer(bool up, int amount, int playerChoose)
 			helper->setY(helper->getY() + PLAYER_MOVEMENT);
 		}            	
 	}       
-    
-}
-
-void AppControll::UpdateScoreOnClients()
-{
     
 }
 
