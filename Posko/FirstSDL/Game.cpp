@@ -106,41 +106,24 @@ sf::Vector2i Game::ExtractPosition(std::string message)
 	int x;
 	int y;
 
-	int x_textsize = 0;
-	int x_lastfoundposition = 0;
-	for (int i = 2; i < 5; i++)
+	string tempmessage = message.substr(2, message.length() - 1);
+
+	int delimeter = tempmessage.find(";");
+	string string_x = tempmessage.substr(0, delimeter);
+
+	string string_y = tempmessage.substr(delimeter+1, message.length()-1 );
+	
+	try
 	{
-		if (message.at(i) == ';')
-		{
-			x_lastfoundposition = i;
-			break;
-		}
-		else
-		{
-			x_textsize++;
-		}
-	}
-	int y_textsize = 0;
-	int y_lastfoundposition = 0;
-	for (int i = x_lastfoundposition + 2; i < 2 + x_lastfoundposition + 3; i++)
+		x = stoi(string_x);
+		y = stoi(string_y);
+
+	} catch(exception)
 	{
-		if (message.at(i) == ';')
-		{
-			y_lastfoundposition = i;
-			break;
-		}
-		else
-		{
-			y_textsize++;
-		}
+		cout << "Here" << endl;
 	}
 
-	string x_final = string(message.substr(2, x_textsize)).c_str();
-	string y_final = string(message.substr(x_textsize + 3, y_textsize)).c_str();
-
-
-	x = stoi(x_final.c_str());
-	y = stoi(y_final.c_str());
+	
 
 	return sf::Vector2i(x, y);
 

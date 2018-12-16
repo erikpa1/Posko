@@ -3,8 +3,9 @@
 #include "Player.h"
 #include "WindowsServer/WindowsServer/Socket.h"
 
+
 #define PLAYER_MOVEMENT 10
-#define BALL_MOVEMENT 50
+#define BALL_MOVEMENT 1
 #define	STARTOFWINDOW 0
 
 //ball movement directions
@@ -102,11 +103,10 @@ void AppControll::Update()
     cout << "Updating states" << endl;
     UpdateBallPosition();
     DetectCollision();
-
 	_socket->SendToClients("B;" + to_string(_ball->getX()) + ";" + to_string(_ball->getY()) + ";");
 	_socket->SendToClients("0;" + to_string(_players[0]->getX()) + ";" + to_string(_players[0]->getY()) + ";");
 	_socket->SendToClients("1;" + to_string(_players[1]->getX()) + ";" + to_string(_players[1]->getY()) + ";");
-           
+	std::this_thread::sleep_for(chrono::microseconds(50));
 }
 
 void AppControll::ResetBallPosition()
@@ -130,10 +130,10 @@ void AppControll::UpdateBallPosition()
 	int randomAngle = rand() % 3;
 
     if (_ball->getUp())
-    {
-        _ball->setY(_ball->getY() - randomAngle);
+    {	
+		_ball->setY(_ball->getY() - BALL_MOVEMENT);// randomAngle);
     } else {
-        _ball->setY(_ball->getY() + randomAngle);
+        _ball->setY(_ball->getY() + BALL_MOVEMENT);
     }
     
     if (_ball->getLeft())
@@ -147,33 +147,33 @@ void AppControll::UpdateBallPosition()
 void AppControll::DetectCollision()
 {
     
-    if (_ball->getX() - BALL_MOVEMENT < _players[0]->getX() + _players[0]->getW() &&
+    if (_ball->getX() - BALL_MOVEMENT <= _players[0]->getX() + _players[0]->getW() &&
     _ball->getY() > _players[0]->getY() && _ball->getY() < _players[0]->getY()+_players[0]->getH())
     {
 		//hit by left player
         _ball->setLeft(false);
 		cout << "Hit by Left player" << endl;
-    } else  if (_ball->getX() + _ball->getW() + BALL_MOVEMENT > _players[1]->getX() &&
-        _ball->getY() > _players[1]->getY() && _ball->getY() < _players[1]->getY() + _players[1]->getH())
+    } else  if (_ball->getX() + _ball->getW() + BALL_MOVEMENT >= _players[1]->getX() &&
+        _ball->getY() > _players[1]->getY() && _ball->getY() <= _players[1]->getY() + _players[1]->getH())
     {
         //hit by right player
         _ball->setLeft(true);
 		cout << "Hit by Right player" << endl;
-    } else if (_ball->getX() - BALL_MOVEMENT < STARTOFWINDOW)
+    } else if (_ball->getX() - BALL_MOVEMENT <= STARTOFWINDOW)
     {
         //hit by left wall
         _score_right += 1;
         UpdateScoreOnClients();
         ResetBallPosition();
         cout << "Hit by Left wall" << endl;
-    } else if (_ball->getX() + _ball->getW() + BALL_MOVEMENT > _w)
+    } else if (_ball->getX() + _ball->getW() + BALL_MOVEMENT >= _w)
     {
         //hit by right wall
         _score_left += 1;
         UpdateScoreOnClients();
         ResetBallPosition();
         cout << "Hit by Right wall" << endl;
-    } else if (_ball->getY() < STARTOFWINDOW)
+    } else if (_ball->getY() <= STARTOFWINDOW)
     {
         //hit by top wall
         _ball->setUp(false);

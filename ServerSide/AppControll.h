@@ -39,6 +39,7 @@ private:
     int _score_left = 0;
     int _score_right = 0;
 	int playersTurn;
+	
         
 	Socket * _socket;
 	Ball * _ball;

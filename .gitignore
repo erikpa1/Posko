@@ -7,4 +7,10 @@
 *.1.tlog
 *.idb
 *.pdb
-ServerSide/nbproject/private/private.xml
+
+**/*.1.tlog
+**/*.tlog
+**/*.obj
+**/*.idb
+**/*.exe
+**/*.pdb
