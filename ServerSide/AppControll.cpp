@@ -5,7 +5,7 @@
 
 
 #define PLAYER_MOVEMENT 10
-#define BALL_MOVEMENT 1
+#define BALL_MOVEMENT 20
 #define	STARTOFWINDOW 0
 
 //ball movement directions
@@ -56,18 +56,18 @@ void AppControll::Start()
 		//cout << "Server started running cycle" << endl;
 
 		//ReadFromClinet();
-            cout << "----------------------------------------" << endl;
-
+		cout << "----------------------------------------" << endl;
+		cout << "Score left: " << _score_left << endl;
+		cout << "Score right: " << _score_right << endl;
 		Update();
-                //_ball->setY(265);
-                cout << "Pozicia Lopticky" << endl;
-                _ball->PrintYourSelf();
-                cout << "pozicia laveho hraca" << endl;
-                _players[0]->PrintYourSelf();
-                cout << "pozicia praveho hraca" << endl;
-                _players[1]->PrintYourSelf();
+        
+        cout << "Pozicia Lopticky" << endl;
+        _ball->PrintYourSelf();
+        cout << "pozicia laveho hraca" << endl;
+        _players[0]->PrintYourSelf();
+        cout << "pozicia praveho hraca" << endl;
+        _players[1]->PrintYourSelf();
 		//SendToClient();
-
 
 		//cout << "Server ended running running cycle" << endl;
 	}
@@ -100,7 +100,6 @@ void AppControll::ReadFromClient()
 
 void AppControll::Update()
 {
-    cout << "Updating states" << endl;
     UpdateBallPosition();
     DetectCollision();
 
