@@ -87,17 +87,44 @@ void Game::RecieveMessage(std::string message)
 {
 	sf::Vector2i position;
 
-	position = ExtractPosition(message);
+	
 	if (message.at(0) == 'B')
 	{
+		position = ExtractPosition(message);
 		_ball->setX(position.x);
 		_ball->setY(position.y);
 	}
-	if (message.at(0) == '0' || message.at(0) == '1')
+	
+	if (message.at(0) == 'P')
 	{
-		int player = message.at(0) == '0' ? 0 : 1;
-		_players[player]->setX(position.x);
-		_players[player]->setY(position.y);
+		position = ExtractPosition(message);
+			
+		_players[0]->setX(position.x);
+		_players[0]->setY(position.y);
+
+		int secondPlayer = 0;
+		int found = 0;
+
+		for (int i = 0; i < message.length(); i++)
+		{
+			if (message.at(i) == 'P')
+			{
+				if (found == 1)
+				{
+					secondPlayer = i;
+				} else
+				{
+					found = 1;
+				}
+			}
+		}
+
+		string newmesasge = message.substr(secondPlayer, message.length()-1);
+
+		position = ExtractPosition(newmesasge);
+
+		_players[1]->setX(position.x);
+		_players[1]->setY(position.y);
 	}
 }
 

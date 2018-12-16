@@ -51,35 +51,25 @@ void AppControll::Destruct()
 
 void AppControll::Start()
 {
-	while (_score_left < 10 || _score_right < 10)
+	while (true)
 	{
 		//cout << "Server started running cycle" << endl;
 
 		//ReadFromClinet();
-		cout << "----------------------------------------" << endl;
-		cout << "Score left: " << _score_left << endl;
-		cout << "Score right: " << _score_right << endl;
+        cout << "----------------------------------------" << endl;
+
 		Update();
-        
-        cout << "Pozicia Lopticky" << endl;
-        _ball->PrintYourSelf();
-        cout << "pozicia laveho hraca" << endl;
-        _players[0]->PrintYourSelf();
-        cout << "pozicia praveho hraca" << endl;
-        _players[1]->PrintYourSelf();
+		//_ball->setY(265);
+		cout << "Pozicia Lopticky" << endl;
+		_ball->PrintYourSelf();
+		cout << "pozicia laveho hraca" << endl;
+		_players[0]->PrintYourSelf();
+		cout << "pozicia praveho hraca" << endl;
+		_players[1]->PrintYourSelf();
 		//SendToClient();
 
-		//cout << "Server ended running running cycle" << endl;
-	}
 
-	cout << "Game Over" << endl;
-	if (_score_left == 10)
-	{
-		cout << "The winner is left Player!" << endl;
-	}
-	else
-	{
-		cout << "The winner is right Player!" << endl;
+		//cout << "Server ended running running cycle" << endl;
 	}
 }
 
@@ -110,11 +100,14 @@ void AppControll::ReadFromClient()
 
 void AppControll::Update()
 {
+    cout << "Updating states" << endl;
     UpdateBallPosition();
     DetectCollision();
 	_socket->SendToClients("B;" + to_string(_ball->getX()) + ";" + to_string(_ball->getY()) + ";");
-	_socket->SendToClients("0;" + to_string(_players[0]->getX()) + ";" + to_string(_players[0]->getY()) + ";");
-	_socket->SendToClients("1;" + to_string(_players[1]->getX()) + ";" + to_string(_players[1]->getY()) + ";");
+	string message = "P;" + to_string(_players[0]->getX()) + ";" + to_string(_players[0]->getY()) + ";";
+	message += "P;" + to_string(_players[1]->getX()) + ";" + to_string(_players[1]->getY()) + ";";	
+	_socket->SendToClients(message);
+		
 	std::this_thread::sleep_for(chrono::microseconds(50));
 }
 
@@ -199,21 +192,22 @@ void AppControll::DetectCollision()
 
 void AppControll::UpdatePlayer(bool up, int amount, int playerChoose)
 {
-    auto helper = _players[0];
+    auto helper = _players[playerChoose];
 
 	if(up)
 	{
-            if ((helper->getY() - PLAYER_MOVEMENT) >= STARTOFWINDOW)
-            {
-            	helper->setY(helper->getY() - PLAYER_MOVEMENT);
-            }
+		if ((helper->getY() - PLAYER_MOVEMENT) >= STARTOFWINDOW)
+		{
+			helper->setY(helper->getY() - PLAYER_MOVEMENT);
+		}            
 	}
 	else
 	{
-            if ((helper->getY() + helper->getH() + PLAYER_MOVEMENT) <= _h)
-            {
-		helper->setY(helper->getY() + PLAYER_MOVEMENT);
-            }	}       
+		if ((helper->getY() + helper->getH() + PLAYER_MOVEMENT) <= _h)
+		{
+			helper->setY(helper->getY() + PLAYER_MOVEMENT);
+		}            	
+	}       
     
 }
 
@@ -224,9 +218,10 @@ void AppControll::UpdateScoreOnClients()
 
 void AppControll::RecieveMessage(std::string message)
 {
-	cout << "Message recieved" << message << endl;
+	cout << "Message recieved " << message << endl;
 
-	int player = atoi(string(message.substr(0,0)).c_str());
+	
+	int player = message.at(0) - 48;
 	bool direction = false;
 
 	if (message.at(1) == '1')
@@ -235,7 +230,9 @@ void AppControll::RecieveMessage(std::string message)
 		direction = true;
 	}
 
-	this->UpdatePlayer(player, PLAYER_MOVEMENT, player);
+	cout << "Player number " << player << endl;
+
+	this->UpdatePlayer(direction, PLAYER_MOVEMENT+10, player);
 
 }
 

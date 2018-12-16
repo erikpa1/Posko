@@ -32,7 +32,7 @@ void Socket::SendToServer(std::string data)
 		cout << "Failded to send" << endl;
 	} else
 	{
-		cout << "Odoslane serveru" << endl;
+		cout << "Odoslane serveru: " << data << endl;
 	}
 }
 
