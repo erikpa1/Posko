@@ -35,8 +35,8 @@ private:
 private:
 	int _w = 800;
 	int _h = 600;
-        int _score_left = 0;
-        int _score_right = 0;
+    int _score_left = 0;
+    int _score_right = 0;
         
 	Socket * _socket;
 	Ball * _ball;

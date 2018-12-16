@@ -27,7 +27,7 @@ void Socket::Destruct()
 
 void Socket::SendToServer(std::string data)
 {
-	if (_socket.send("Nazdar", 7) != sf::TcpSocket::Done)
+	if (_socket.send(data.c_str(), data.length()+1) != sf::TcpSocket::Done)
 	{
 		cout << "Failded to send" << endl;
 	} else
