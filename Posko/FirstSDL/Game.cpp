@@ -181,7 +181,10 @@ void Game::RecieveEvent(SDL_Event event)
 			break;
 			case SDLK_DOWN:			
 			_socket.SendToServer("10");
-			break;			
+			break;
+			case SDLK_SPACE:
+			_socket.SendToServer("Play");
+			break;
 		}
 
 		switch(event.key.keysym.sym)

@@ -39,6 +39,8 @@ private:
     int _score_left = 0;
     int _score_right = 0;
 	int playersTurn;
+        
+        bool _start = false;
 	
         
 	Socket * _socket;

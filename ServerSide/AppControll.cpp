@@ -51,12 +51,15 @@ void AppControll::Destruct()
 
 void AppControll::Start()
 {
+        
 	while (_score_left < 10 || _score_right < 10)
 	{
-		//cout << "Server started running cycle" << endl;
+            if (_start == false)
+            {
+                //cout << "Server started running cycle" << endl;
 		Update();
 		//ReadFromClinet();
-        cout << "----------------------------------------" << endl;
+                cout << "----------------------------------------" << endl;
 		cout << "Pozicia Lopticky" << endl;
 		_ball->PrintYourSelf();
 		cout << "pozicia laveho hraca" << endl;
@@ -66,6 +69,8 @@ void AppControll::Start()
 		
 		//SendToClient();
 		//cout << "Server ended running running cycle" << endl;
+            }
+		
 	}
 
 	cout << "Game Over" << endl;
@@ -111,6 +116,7 @@ void AppControll::Update()
     UpdateBallPosition();
     DetectCollision();
 	_socket->SendToClients("B;" + to_string(_ball->getX()) + ";" + to_string(_ball->getY()) + ";");
+        
 	string message = "P;" + to_string(_players[0]->getX()) + ";" + to_string(_players[0]->getY()) + ";";
 	message += "P;" + to_string(_players[1]->getX()) + ";" + to_string(_players[1]->getY()) + ";";	
 	_socket->SendToClients(message);
@@ -235,6 +241,10 @@ void AppControll::RecieveMessage(std::string message)
 {
 	cout << "Message recieved " << message << endl;
 
+        //if (message == "Play")
+        //{
+         //   _start = true;
+        //}
 	
 	int player = message.at(0) - 48;
 	bool direction = false;
