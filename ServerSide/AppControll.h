@@ -50,8 +50,6 @@ private:
     Ball * _ball;
 
     std::vector<Player*> _players;
-    
-    bool _networkswitch = false;
 
 
 };

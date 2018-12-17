@@ -124,24 +124,16 @@ void AppControll::Update() {
     cout << "Updating states" << endl;
     UpdateBallPosition();
     DetectCollision();
-    string ball = "B;" + to_string(_ball->getX()) + ";" + to_string(_ball->getY()) + ";";                   
+    string ball = "B;" + to_string(_ball->getX()) + ";" + to_string(_ball->getY()) + ";";
+                
+    _socket->SendToClients(ball);
+    _socket1->SendToClients(ball);    
 
     string message = "P;" + to_string(_players[0]->getX()) + ";" + to_string(_players[0]->getY()) + ";";
     message += "P;" + to_string(_players[1]->getX()) + ";" + to_string(_players[1]->getY()) + ";";
 
-    if (_networkswitch == true)
-    {
-        _socket->SendToClients(ball);
-        _socket->SendToClients(message);
-        _networkswitch = false;
-    } else {
-         _socket1->SendToClients(ball);    
-        _socket1->SendToClients(message);
-        _networkswitch = true;
-    }
-    
-    
-   
+    _socket->SendToClients(message);
+    _socket1->SendToClients(message);
 
     std::this_thread::sleep_for(chrono::microseconds(500));
 }
