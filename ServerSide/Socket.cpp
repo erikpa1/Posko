@@ -1,5 +1,7 @@
 ﻿#include "Socket.h"
 #include "NetworkReactor.h"
+#include "serializator.h"
+#include "Data.h"
 
 #define SERVER "frios2.fri.uniza.sk" //127.0.0.1
 #define PORT 12357  //123456
@@ -39,7 +41,7 @@ void Socket::Construct() {
 }
 
 void Socket::ReadFromClient() {
-    listen(_sockfd, 5);
+    listen(_sockfd, 20);
     cli_len = sizeof (cli_addr);
 
     cout << "Going to accept" << endl;
@@ -88,6 +90,7 @@ void Socket::SendToClients(std::string data) {
             perror("Error writing to socket");
         } else {
             cout << "Server written: " << packet << endl;
+            //_data.push_back(data);
         }
     }
 }
@@ -101,8 +104,6 @@ void Socket::FillSocket(char* data, string message, int size)
             data[i] = message.at(i);
         } else {
             data[i] = 'x';
-        }
-        
-    }
-    
+        }        
+    }    
 }

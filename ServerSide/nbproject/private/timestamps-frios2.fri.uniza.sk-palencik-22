@@ -1,4 +1,4 @@
-#Mon Dec 17 11:39:07 CET 2018
+#Mon Dec 17 15:19:18 CET 2018
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\classsf_1_1renderwindow.png=c1544909547222
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\include\\sfml\\system\\threadlocalptr.hpp=c1544909547646
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\functions_j.html=c1544909547394
@@ -145,7 +145,7 @@ c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windows
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\nbproject\\makefile-release.mk=c1544910284062
 d\:\\programovanie\\posko\\serverside\\windowsserver\\windowsserver\\external\\include\\sfml\\graphics\\view.hpp=c1531680594716
 d\:\\programovanie\\posko\\serverside\\windowsserver\\windowsserver\\external\\include\\sfml\\network\\packet.hpp=c1531680594724
-d\:\\programovanie\\posko\\serverside\\nbproject\\makefile-release.mk=c1544566404811
+d\:\\programovanie\\posko\\serverside\\nbproject\\makefile-release.mk=c1545056306305
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\ftv2mnode.png=c1544909547338
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\functions_l.html=c1544909547396
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\include\\sfml\\graphics\\drawable.hpp=c1544909547597
@@ -161,7 +161,7 @@ c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windows
 d\:\\programovanie\\posko\\serverside\\windowsserver\\windowsserver\\external\\include\\sfml\\graphics\\primitivetype.hpp=c1531680594696
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\group__network.html=c1544909547414
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\classsf_1_1http_1_1response-members.html=c1544909547173
-d\:\\programovanie\\posko\\serverside\\socket.cpp=c1545043139849
+d\:\\programovanie\\posko\\serverside\\socket.cpp=c1545056347885
 d\:\\programovanie\\posko\\serverside\\windowsserver\\windowsserver\\windowsserver.vcxproj.filters=c1544953383705
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\functions_eval_p.html=c1544909547360
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\include\\sfml\\graphics\\texture.hpp=c1544909547613
@@ -247,6 +247,7 @@ c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windows
 d\:\\programovanie\\posko\\serverside\\windowsserver\\windowsserver\\debug\\windowsserver.tlog\\link.command.1.tlog=c1544985807382
 d\:\\programovanie\\posko\\serverside\\windowsserver\\windowsserver\\debug\\windowsserver.tlog\\link.write.1.tlog=c1544985807374
 d\:\\programovanie\\posko\\serverside\\makefile.txt=c1543344754462
+d\:\\programovanie\\posko\\serverside\\serializator.cpp=c1545055280302
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\dir_9ca93fe75e375680c8d5541792711465.html=c1544909547327
 d\:\\programovanie\\posko\\serverside\\windowsserver\\windowsserver\\external\\include\\sfml\\graphics\\texture.hpp=c1531680594710
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\bdwn.png=c1544909547123
@@ -479,7 +480,7 @@ c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windows
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\include\\sfml\\graphics\\renderwindow.hpp=c1544909547609
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\main.cpp=c1544909547671
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\structsf_1_1event_1_1joystickmoveevent-members.html=c1544909547446
-d\:\\programovanie\\posko\\serverside\\socket.h=c1545041975666
+d\:\\programovanie\\posko\\serverside\\socket.h=c1545056292718
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\structsf_1_1event_1_1keyevent-members.html=c1544909547448
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\structsf_1_1event_1_1sensorevent-members.html=c1544909547456
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\examples\\shader\\resources\\storm.vert=c1544909547527
@@ -515,7 +516,7 @@ c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windows
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\functions_e.html=c1544909547345
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\include\\sfml\\audio\\soundbuffer.hpp=c1544909547582
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\sync_off.png=c1544909547470
-d\:\\programovanie\\posko\\serverside\\nbproject\\makefile-debug.mk=c1545039922666
+d\:\\programovanie\\posko\\serverside\\nbproject\\makefile-debug.mk=c1545056306280
 d\:\\programovanie\\posko\\serverside\\windowsserver\\windowsserver\\external\\include\\sfml\\network\\socket.hpp=c1531680594726
 d\:\\programovanie\\posko\\serverside\\windowsserver\\windowsserver\\external\\include\\sfml\\system\\thread.inl=c1531680594748
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\functions_eval_i.html=c1544909547354
@@ -787,6 +788,7 @@ c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windows
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\include\\sfml\\audio\\soundfilefactory.hpp=c1544909547584
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\classsf_1_1shape-members.html=c1544909547230
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\classsf_1_1shape.html=c1544909547231
+d\:\\programovanie\\posko\\serverside\\data.h=c1545055112423
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\classsf_1_1rendertarget.png=c1544909547216
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\joystick_8hpp_source.html=c1544909547065
 d\:\\programovanie\\posko\\serverside\\renderable.h=c1543343464204
@@ -796,6 +798,7 @@ c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windows
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\classsf_1_1image-members.html=c1544909547174
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\classsf_1_1vertex.html=c1544909547312
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\functions_i.html=c1544909547393
+d\:\\programovanie\\posko\\serverside\\serializator.h=c1545054761326
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\examples\\pong\\pong.exe=c1544909547512
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\include\\sfml\\graphics\\renderstates.hpp=c1544909547607
 c\:\\users\\samuel\\documents\\github\\posko\\serverside\\windowsserver\\windowsserver\\external\\doc\\html\\functions_eval_m.html=c1544909547358

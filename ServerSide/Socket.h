@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <vector>
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -11,7 +12,6 @@
 #include <netinet/in.h>
 #include <iostream>
 #include <thread>
-
 
 class NetworkReactor;
 
@@ -25,7 +25,9 @@ private:
     struct sockaddr_in serv_addr, cli_addr;
     socklen_t cli_len;
     std::thread _myThread;
-
+    std::vector<std::string> _data;
+    
+    
     bool _inited = false;
 public:
 
