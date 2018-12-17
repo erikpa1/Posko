@@ -7,6 +7,7 @@ Rectangle::Rectangle()
 
 Rectangle::~Rectangle()
 {
+	Destruct();
 }
 
 void Rectangle::Construct()
@@ -24,6 +25,8 @@ void Rectangle::Destruct()
 {
 	delete _color;
 	delete _source;
+	_source = nullptr;
+	_color = nullptr;
 }
 
 void Rectangle::Update()

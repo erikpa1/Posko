@@ -9,7 +9,7 @@ Player::Player()
 
 Player::~Player()
 {
-
+	Destruct();
 }
 
 void Player::Construct()
@@ -20,7 +20,8 @@ void Player::Construct()
 
 void Player::Destruct()
 {
-	_reprezentation->Destruct();
+	delete _reprezentation;
+	_reprezentation = nullptr;
 }
 
 void Player::setX(int x)

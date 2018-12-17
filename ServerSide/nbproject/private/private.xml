@@ -9,8 +9,9 @@
         <group>
             <file>file:/D:/Programovanie/Posko/ServerSide/Socket.h</file>
             <file>file:/D:/Programovanie/Posko/ServerSide/Socket.cpp</file>
+            <file>file:/D:/Programovanie/Posko/ServerSide/AppControll.h</file>
             <file>file:/D:/Programovanie/Posko/ServerSide/main.cpp</file>
-            <file>file:/D:/Programovanie/Posko/ServerSide/AppControll.cpp</file>
+            <file>file:/D:/Programovanie/Posko/ServerSide/NetworkReactor.h</file>
         </group>
     </open-files>
 </project-private>

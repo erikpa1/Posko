@@ -17,10 +17,19 @@
 #define DOWNLEFT 4
 #define LEFT 5
 
+#define PORT 12356  //123456
+#define PORT1 12357 
+
 void AppControll::Construct() {
-    _socket = new Socket(12356);
+
+    _socket = new Socket(PORT);
+    _socket1 = new Socket(PORT1);
+
     _socket->Construct();
+    _socket1->Construct();
+
     _socket->SetReactor(this);
+    _socket1->SetReactor(this);
 
     _players.push_back(new Player());
     _players.push_back(new Player());
@@ -40,15 +49,22 @@ void AppControll::Construct() {
 }
 
 void AppControll::Destruct() {
-    //_socket->Destruct();
-    //delete _socket;
-    _socket = nullptr;
+    delete _socket;
+    delete _socket1;
+    delete _ball;
 }
 
 void AppControll::Start() {
 
     while (_score_left < SCORELIMIT || _score_right < SCORELIMIT) {
-        if (_start == false) {
+        
+        if (_state != "run")
+        {
+            break;
+            cout << "Disconnect reqest putted" << endl;
+        }
+        
+        if (_socket->IsConnected() && _socket1->IsConnected()) {
             //cout << "Server started running cycle" << endl;
             Update();
             //ReadFromClinet();
@@ -60,15 +76,21 @@ void AppControll::Start() {
             cout << "pozicia praveho hraca" << endl;
             _players[1]->PrintYourSelf();
 
-            //SendToClient();
-            //cout << "Server ended running running cycle" << endl;
+        } else {
+            if (_socket->IsConnected())
+            {
+                cout << "First connected" << endl;
+            }
+            if (_socket1->IsConnected())
+            {
+                cout << "Second connected" << endl;
+            }
         }
-
     }
-
+    
     cout << "Game Over" << endl;
 
-    if (_score_left == SCORELIMIT) {
+    if (_score_left > _score_right) {
         cout << "The winner is Left Player!" << endl;
     } else {
         cout << "the winner is Right Player!" << endl;
@@ -102,11 +124,16 @@ void AppControll::Update() {
     cout << "Updating states" << endl;
     UpdateBallPosition();
     DetectCollision();
-    _socket->SendToClients("B;" + to_string(_ball->getX()) + ";" + to_string(_ball->getY()) + ";");
+    string ball = "B;" + to_string(_ball->getX()) + ";" + to_string(_ball->getY()) + ";";
+                
+    _socket->SendToClients(ball);
+    _socket1->SendToClients(ball);    
 
     string message = "P;" + to_string(_players[0]->getX()) + ";" + to_string(_players[0]->getY()) + ";";
     message += "P;" + to_string(_players[1]->getX()) + ";" + to_string(_players[1]->getY()) + ";";
+
     _socket->SendToClients(message);
+    _socket1->SendToClients(message);
 
     std::this_thread::sleep_for(chrono::microseconds(500));
 }
@@ -120,10 +147,15 @@ void AppControll::ResetBallPosition() {
     }
     _ball->setX(_w / 2);
     _ball->setY(_h / 2);
+    
+    string score = "S"+ to_string(_score_left) + " : " + to_string(_score_right)+";"; 
+    _socket->SendToClients(score);
+    _socket1->SendToClients(score);
 
 }
 
 void AppControll::UpdateBallPosition() {
+    
     srand(time(NULL));
     int randomAngle = rand() % 3;
 
@@ -204,24 +236,27 @@ void AppControll::UpdatePlayer(bool up, int amount, int playerChoose) {
 }
 
 void AppControll::RecieveMessage(std::string message) {
+    
     cout << "Message recieved " << message << endl;
-
-    //if (message == "Play")
-    //{
-    //   _start = true;
-    //}
 
     int player = message.at(0) - 48;
     bool direction = false;
-
-    if (message.at(1) == '1') {
+    
+    if (message == "END")
+    {
+        _state = "end";
+    } 
+    else {
+        if (message.at(1) == '1') {
         cout << "Player is going up" << endl;
         direction = true;
     }
+    
+        cout << "Player number " << player << endl;
+        this->UpdatePlayer(direction, PLAYER_MOVEMENT + 10, player);        
+        
+    }
 
-    cout << "Player number " << player << endl;
-
-    this->UpdatePlayer(direction, PLAYER_MOVEMENT + 10, player);
+    
 
 }
-

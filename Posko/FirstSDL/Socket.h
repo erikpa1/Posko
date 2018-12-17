@@ -14,6 +14,7 @@ public:
 	void SendToServer(std::string data);	
 	void SetNetworkReciever(NetworkReciever * reciever);
 	void ReadFromServer();
+	void Stop();
 	
 private:
 

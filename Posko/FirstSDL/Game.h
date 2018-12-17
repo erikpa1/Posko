@@ -34,6 +34,7 @@ private:
 
 	//simulation state run
 	bool _gameIsRunning = false;
+	bool _endreqeusted = false;
 
 	//players vector
 	std::vector<Player*> _players;
@@ -47,8 +48,7 @@ private:
 	//game ball
 	Ball* _ball = nullptr;
 
-	//game score
-	std::pair<int, int> _score = { 0 ,0 };
+	std::string _score;
 
 	Socket _socket;
 

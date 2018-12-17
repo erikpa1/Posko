@@ -42,7 +42,7 @@ void Game::Construct()
 
 	_ball = new Ball();
 	_ball->Construct();
-	_ball->SetName("Game ball");
+	_ball->SetName("Gam e ball");
 	_ball->setW(10);
 	_ball->setH(10);
 
@@ -58,8 +58,16 @@ void Game::Construct()
 
 void Game::Destruct()
 {
-	_gameWindow->Destruct();
+	delete _gameWindow;
+	delete _ball;
+	delete _players[0];
+	delete _players[1];
+
+	_players.clear();
+
 	_gameWindow = nullptr;
+	_ball = nullptr;
+	
 }
 
 void Game::Start()
@@ -68,13 +76,21 @@ void Game::Start()
 	{
 		while (_gameIsRunning)
 		{
+			if (_endreqeusted == true)
+			{
+				break;
+			}
+
 			_gameWindow->Update();
-			_gameWindow->Draw();						
+			_gameWindow->Draw();	
+			_gameWindow->SetWindowTitle(_score);
 		}
 	} else
 	{
 		std::cout << "Window je null" << std::endl;
 	}
+
+	std::cout << "Ending" << endl;
 	
 }
 
@@ -87,56 +103,68 @@ void Game::RecieveMessage(std::string message)
 {
 	sf::Vector2i position;
 
-	if (message.at(0) == 'R')
+	if (message.at(0) == 'S')
 	{
-		_ball->SetRandomColor();
-		if (message.at(1) == '0')
-		{
-			_players[0]->SetRandomColor();
-		} else
-		{
-			_players[1]->SetRandomColor();
-		}
+		_score = "Skore je: " + message.substr(1, message.find(";")-1);		
 	}
-	
-	if (message.at(0) == 'B')
+	   
+	if (message.find("END") == 0)
 	{
-		position = ExtractPosition(message);
-		_ball->setX(position.x);
-		_ball->setY(position.y);
-	}
-	
-	if (message.at(0) == 'P')
+		_endreqeusted = true;
+		_socket.Stop();
+	} else
 	{
-		position = ExtractPosition(message);
-			
-		_players[0]->setX(position.x);
-		_players[0]->setY(position.y);
-
-		int secondPlayer = 0;
-		int found = 0;
-
-		for (int i = 0; i < message.length(); i++)
+		if (message.at(0) == 'R')
 		{
-			if (message.at(i) == 'P')
+			_ball->SetRandomColor();
+			if (message.at(1) == '0')
 			{
-				if (found == 1)
-				{
-					secondPlayer = i;
-				} else
-				{
-					found = 1;
-				}
+				_players[0]->SetRandomColor();
+			}
+			else
+			{
+				_players[1]->SetRandomColor();
 			}
 		}
+		if (message.at(0) == 'B')
+		{
+			position = ExtractPosition(message);
+			_ball->setX(position.x);
+			_ball->setY(position.y);
+		}
+		if (message.at(0) == 'P')
+		{
+			position = ExtractPosition(message);
 
-		string newmesasge = message.substr(secondPlayer, message.length()-1);
+			_players[0]->setX(position.x);
+			_players[0]->setY(position.y);
 
-		position = ExtractPosition(newmesasge);
+			int secondPlayer = 0;
+			int found = 0;
 
-		_players[1]->setX(position.x);
-		_players[1]->setY(position.y);
-	}
+			for (int i = 0; i < message.length(); i++)
+			{
+				if (message.at(i) == 'P')
+				{
+					if (found == 1)
+					{
+						secondPlayer = i;
+					}
+					else
+					{
+						found = 1;
+					}
+				}
+			}
+
+			string newmesasge = message.substr(secondPlayer, message.length() - 1);
+
+			position = ExtractPosition(newmesasge);
+
+			_players[1]->setX(position.x);
+			_players[1]->setY(position.y);
+		}
+	}	
 }
 
 sf::Vector2i Game::ExtractPosition(std::string message)
@@ -158,11 +186,11 @@ sf::Vector2i Game::ExtractPosition(std::string message)
 
 	} catch(exception)
 	{
-		cout << "Here" << endl;
+		cout << "Doslo k chybe medzi paketmi" << endl;
+		x = 0;
+		y = 0;
 	}
-
 	
-
 	return sf::Vector2i(x, y);
 
 		
@@ -181,9 +209,12 @@ void Game::RecieveEvent(SDL_Event event)
 			break;
 			case SDLK_DOWN:			
 			_socket.SendToServer("10");
-			break;
-			case SDLK_SPACE:
-			_socket.SendToServer("Play");
+			break;			
+			case SDLK_ESCAPE:
+			_socket.SendToServer("END");
+			_endreqeusted = true;
+			_socket.Stop();
+			cout << "Stop called from my iniciativy" << endl;
 			break;
 		}
 

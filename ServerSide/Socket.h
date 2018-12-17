@@ -24,15 +24,19 @@ private:
     NetworkReactor * _reactor;
     struct sockaddr_in serv_addr, cli_addr;
     socklen_t cli_len;
-    std::thread _myThread;
-    std::vector<std::string> _data;
+    bool _isconnected = false;
     
-    
+    std::thread _myThread;    
     bool _inited = false;
+    bool _disconnectRequest = false;
+    
 public:
 
     Socket(int port);
 
+    bool IsConnected();
+    bool GetDisconnectReqeust();
+    
     void Construct();
     void Destruct();
     void SetReactor(NetworkReactor * reactor);

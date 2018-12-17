@@ -19,10 +19,11 @@ public:
 	void Update() override;
 	void Draw() override;
 	void UpdateEvent(SDL_Event sdlEvent) override;
+	void SetWindowTitle(std::string name);
 
 	void AddEventRecievers(EventReciever * reciever);
 	void AddChildren(Renderable* children) override;
-	   	
+	
 
 private:
 

@@ -20,9 +20,15 @@ using namespace std;
  */
 int main(int argc, char** argv) {
 
-    AppControll control;
-    control.Construct();
-    control.Start();
+    
+    try {
+        AppControll control;
+        control.Construct();
+        control.Start();        
+    } catch (std::exception)
+    {
+        
+    }    
 
     return 0;
 }

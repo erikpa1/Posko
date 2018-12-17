@@ -4,12 +4,14 @@
 #include "Data.h"
 
 #define SERVER "frios2.fri.uniza.sk" //127.0.0.1
-#define PORT 12357  //123456
+
 
 using namespace std;
 
+
+
 Socket::Socket(int port) {
-    _port = PORT;
+    _port = port;
 }
 
 void Socket::Construct() {
@@ -34,13 +36,23 @@ void Socket::Construct() {
         cout << "Adress initialized" << endl;
     }
 
-    _myThread = thread(&Socket::ReadFromClient, this);
+    _myThread = thread(&Socket::ReadFromClient, this);   
     _inited = true;
 
 
 }
 
+bool Socket::IsConnected() {
+    return _isconnected;
+}
+
+bool Socket::GetDisconnectReqeust()
+{
+    return _disconnectRequest;
+}
+
 void Socket::ReadFromClient() {
+    
     listen(_sockfd, 20);
     cli_len = sizeof (cli_addr);
 
@@ -50,16 +62,23 @@ void Socket::ReadFromClient() {
         cout << "ERROR on accept" << endl;
     } else {
         cout << "Socket accepted" << endl;
+        _isconnected = true;
+        //_reactor->ClientConnected();     
     }
-
-
-    while (true) {
+    
+    while (_disconnectRequest == false) {
         char buffer[256];
         bzero(buffer, 256);
 
         int n = read(_newsockfd, buffer, 255);
 
         string message = buffer;
+        
+        if (message == "END")
+        {
+            _disconnectRequest = true;     
+        }
+        
         _reactor->RecieveMessage(message);
 
     }

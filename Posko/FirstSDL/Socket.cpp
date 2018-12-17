@@ -16,11 +16,7 @@ void Socket::Contruct()
 	{
 		cout << "Connected on server" << endl;
 	}
-
 	_thread = std::thread(&Socket::ReadFromServer, this);
-
-
-
 }
 
 void Socket::Destruct()
@@ -42,40 +38,24 @@ void Socket::SendToServer(std::string data)
 void Socket::ReadFromServer()
 {
 	char data[21];
-	//char size[4];
 	size_t recieveddata = 0;
-	//size_t recieveddata1 = 0;
+
 	cout << "Server is going to read from client" << endl;
 	while (true)
-	{
-		//int messagesize = 0;		
-		////cout << "Client connected, his adress " << _socket.getRemoteAddress() << endl
-
-		//if (_socket.receive(size, 3, recieveddata1))
-		//{
-		//	string result = size;
-		//	cout << "Predpripravene data: " << result << endl;
-		//	if (result.at(2) == ';')
-		//	{
-		//		if (result.at(0) == '0')
-		//		{
-		//			result = result.substr(1, 1);
-		//		}
-		//		else
-		//		{
-		//			result = result.substr(0, 1);
-		//		}
-		//		messagesize = stoi(result);
-		//	}
-		//	
-
-		//}		
+	{				
 		if (_socket.receive(data, 20, recieveddata) == sf::Socket::Done)
 		{
 			cout << "Client poslal: " << string(data) << endl;
 			_reactor->RecieveMessage(string(data));
 		}
 	}
+}
+
+void Socket::Stop()
+{
+	_socket.disconnect();
+	_listener.close();
+	_thread.detach();
 }
 
 

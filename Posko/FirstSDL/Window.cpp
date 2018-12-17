@@ -34,16 +34,15 @@ void Window::Construct()
 
 void Window::Destruct()
 {
-	SDL_DestroyWindow(_window);
 	SDL_DestroyRenderer(_renderer);
-	SDL_Quit();
-
-	delete this;
+	SDL_DestroyWindow(_window);	
+	SDL_Quit();	
 }
 
 
 Window::~Window()
 {
+	Destruct();
 }
 
 void Window::Update()
@@ -94,6 +93,11 @@ void Window::Draw()
 void Window::UpdateEvent(SDL_Event sdlEvent)
 {
 	
+}
+
+void Window::SetWindowTitle(std::string name)
+{
+	SDL_SetWindowTitle(_window, name.c_str());
 }
 
 void Window::AddEventRecievers(EventReciever * reciever)

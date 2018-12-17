@@ -3,6 +3,7 @@
 #include <iostream>
 #include "WindowsServer/WindowsServer/NetworkReactor.h"
 #include  <stdlib.h>
+#include <string>
 
 class Socket;
 class Player;
@@ -15,6 +16,8 @@ public:
     void Destruct();
     void Start();
     void InitPlayer(Player * player, int number);
+    void ClientConnected();
+    void RecieveMessage(std::string message) override;
 
 private:
 
@@ -26,12 +29,9 @@ private:
     void UpdateBallPosition();
     void UpdatePlayer(bool up, int amount, int playerChoose);
     void DetectCollision();
-    void UpdateScoreOnClients();
-
-    void RecieveMessage(std::string message) override;
-
 
 private:
+    
     int _w = 1000;
     int _h = 500;
     int _score_left = 0;
@@ -39,9 +39,14 @@ private:
     int playersTurn;
 
     bool _start = false;
+       
+    int _clientNumber = 0;
 
+    std::string _state = "run";
 
     Socket * _socket;
+    Socket * _socket1;
+    
     Ball * _ball;
 
     std::vector<Player*> _players;
