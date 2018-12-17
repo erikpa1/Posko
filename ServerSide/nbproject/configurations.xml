@@ -16,6 +16,7 @@
       <itemPath>AppControll.h</itemPath>
       <itemPath>Ball.cpp</itemPath>
       <itemPath>Ball.h</itemPath>
+      <itemPath>NetworkReactor.h</itemPath>
       <itemPath>Player.cpp</itemPath>
       <itemPath>Player.h</itemPath>
       <itemPath>Renderable.h</itemPath>
@@ -44,6 +45,9 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
+        <linkerTool>
+          <commandLine>-pthread</commandLine>
+        </linkerTool>
       </compileType>
       <item path="AppControll.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -52,6 +56,8 @@
       <item path="Ball.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Ball.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NetworkReactor.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Player.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -93,6 +99,8 @@
       <item path="Ball.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Ball.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NetworkReactor.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Player.cpp" ex="false" tool="1" flavor2="0">
       </item>

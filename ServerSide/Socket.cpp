@@ -1,4 +1,5 @@
 ﻿#include "Socket.h"
+#include "NetworkReactor.h"
         
 #define SERVER "frios2.fri.uniza.sk" //127.0.0.1
 #define PORT 12356  //123456

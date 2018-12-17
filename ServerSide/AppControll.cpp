@@ -175,7 +175,7 @@ void AppControll::DetectCollision()
         //hit by left wall
         _score_right += 1;
 
-		messageToClient = "R1";
+		messageToClient = "R1;";
 
         ResetBallPosition();
         cout << "Hit by Left wall" << endl;
@@ -184,7 +184,7 @@ void AppControll::DetectCollision()
         //hit by right wall
         _score_left += 1;
 
-		messageToClient = "R0";
+		messageToClient = "R0;";
 
 
         ResetBallPosition();
