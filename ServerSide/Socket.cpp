@@ -80,10 +80,7 @@ void Socket::ReadFromClient() {
         }
         
         _reactor->RecieveMessage(message);
-
     }
-
-
 
 }
 
