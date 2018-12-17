@@ -3,7 +3,7 @@
 #include <iostream>
 
 #define SERVER "frios2.fri.uniza.sk" //127.0.0.1
-#define PORT 12356  //123456
+#define PORT 12357  //123456
 
 using namespace std;
 
@@ -41,17 +41,39 @@ void Socket::SendToServer(std::string data)
 
 void Socket::ReadFromServer()
 {
-	char data[256];
+	char data[21];
+	//char size[4];
 	size_t recieveddata = 0;
+	//size_t recieveddata1 = 0;
 	cout << "Server is going to read from client" << endl;
 	while (true)
 	{
-		
-		//cout << "Client connected, his adress " << _socket.getRemoteAddress() << endl;
-		if (_socket.receive(data, 255, recieveddata) == sf::Socket::Done)
+		//int messagesize = 0;		
+		////cout << "Client connected, his adress " << _socket.getRemoteAddress() << endl
+
+		//if (_socket.receive(size, 3, recieveddata1))
+		//{
+		//	string result = size;
+		//	cout << "Predpripravene data: " << result << endl;
+		//	if (result.at(2) == ';')
+		//	{
+		//		if (result.at(0) == '0')
+		//		{
+		//			result = result.substr(1, 1);
+		//		}
+		//		else
+		//		{
+		//			result = result.substr(0, 1);
+		//		}
+		//		messagesize = stoi(result);
+		//	}
+		//	
+
+		//}		
+		if (_socket.receive(data, 20, recieveddata) == sf::Socket::Done)
 		{
 			cout << "Client poslal: " << string(data) << endl;
-			//_reactor->RecieveMessage(string(data));
+			_reactor->RecieveMessage(string(data));
 		}
 	}
 }

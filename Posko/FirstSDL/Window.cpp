@@ -19,8 +19,8 @@ void Window::Construct()
 
 	_x = 500;
 	_y = 500;
-	_w = 800;
-	_h = 600;
+	_w = 1000;
+	_h = 500;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{

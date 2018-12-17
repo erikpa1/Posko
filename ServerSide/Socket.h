@@ -15,30 +15,28 @@
 
 class NetworkReactor;
 
-
-class Socket
-{
-
+class Socket {
 private:
-    
-	int _port;
-	int _sockfd;
-	int _newsockfd;
-        NetworkReactor * _reactor;     
-        struct sockaddr_in serv_addr, cli_addr;
-        socklen_t cli_len;
-	std::thread _myThread;
-        
-        bool _inited = false;
+
+    int _port;
+    int _sockfd;
+    int _newsockfd;
+    NetworkReactor * _reactor;
+    struct sockaddr_in serv_addr, cli_addr;
+    socklen_t cli_len;
+    std::thread _myThread;
+
+    bool _inited = false;
 public:
 
-	Socket(int port);
+    Socket(int port);
 
-	void Construct();
-	void Destruct();
-        void SetReactor(NetworkReactor * reactor);
-        void ReadFromClient();
-        
-	void SendToClients(std::string data);
+    void Construct();
+    void Destruct();
+    void SetReactor(NetworkReactor * reactor);
+    void ReadFromClient();
+
+    void SendToClients(std::string data);
+    void FillSocket(char * data, std::string message, int size);
 
 };
