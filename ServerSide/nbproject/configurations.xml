@@ -94,6 +94,9 @@
         <asmTool>
           <developmentMode>5</developmentMode>
         </asmTool>
+        <linkerTool>
+          <commandLine>-pthread</commandLine>
+        </linkerTool>
       </compileType>
       <item path="AppControll.cpp" ex="false" tool="1" flavor2="0">
       </item>

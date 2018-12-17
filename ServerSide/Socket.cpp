@@ -1,6 +1,5 @@
 ﻿#include "Socket.h"
 #include "NetworkReactor.h"
-#include "serializator.h"
 #include "Data.h"
 
 #define SERVER "frios2.fri.uniza.sk" //127.0.0.1

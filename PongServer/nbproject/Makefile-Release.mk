@@ -37,6 +37,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/AppControll.o \
 	${OBJECTDIR}/Ball.o \
+	${OBJECTDIR}/NetworkReactor.o \
 	${OBJECTDIR}/Player.o \
 	${OBJECTDIR}/Socket.o \
 	${OBJECTDIR}/main.o
@@ -60,11 +61,11 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/serverside
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/pongserver
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/serverside: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/pongserver: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/serverside ${OBJECTFILES} ${LDLIBSOPTIONS} -pthread
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/pongserver ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/AppControll.o: AppControll.cpp
 	${MKDIR} -p ${OBJECTDIR}
@@ -75,6 +76,11 @@ ${OBJECTDIR}/Ball.o: Ball.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Ball.o Ball.cpp
+
+${OBJECTDIR}/NetworkReactor.o: NetworkReactor.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/NetworkReactor.o NetworkReactor.cpp
 
 ${OBJECTDIR}/Player.o: Player.cpp
 	${MKDIR} -p ${OBJECTDIR}
