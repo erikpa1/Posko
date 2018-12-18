@@ -34,6 +34,7 @@ void Window::Construct()
 
 void Window::Destruct()
 {
+	_children.clear();
 	SDL_DestroyRenderer(_renderer);
 	SDL_DestroyWindow(_window);	
 	SDL_Quit();	

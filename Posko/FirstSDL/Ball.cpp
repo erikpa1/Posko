@@ -9,6 +9,7 @@ Ball::Ball()
 
 Ball::~Ball()
 {
+	Destruct();
 }
 
 void Ball::Construct()
@@ -19,7 +20,7 @@ void Ball::Construct()
 
 void Ball::Destruct()
 {
-	_reprezentation->Destruct();
+	delete _reprezentation;
 }
 
 void Ball::setX(int x)

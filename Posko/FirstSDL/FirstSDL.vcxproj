@@ -151,6 +151,7 @@
     <ClInclude Include="Ball.h" />
     <ClInclude Include="EventReciever.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="heap_monitor.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="NetworkReciever.h" />
     <ClInclude Include="Player.h" />

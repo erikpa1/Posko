@@ -62,5 +62,8 @@
       <Filter>Pong</Filter>
     </ClInclude>
     <ClInclude Include="NetworkReciever.h" />
+    <ClInclude Include="heap_monitor.h">
+      <Filter>Renderable</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

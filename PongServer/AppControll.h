@@ -11,7 +11,8 @@ class Ball;
 
 class AppControll : public NetworkReactor {
 public:
-
+    
+    
     void Construct();
     void Destruct();
     void Start();

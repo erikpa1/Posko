@@ -52,6 +52,8 @@ void AppControll::Destruct() {
     delete _socket;
     delete _socket1;
     delete _ball;
+    delete _players[0];
+    delete _players[1];
 }
 
 void AppControll::Start() {

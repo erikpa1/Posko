@@ -46,9 +46,14 @@ void Socket::ReadFromServer()
 		if (_socket.receive(data, 20, recieveddata) == sf::Socket::Done)
 		{
 			cout << "Client poslal: " << string(data) << endl;
-			_reactor->RecieveMessage(string(data));
-		}
+			if(_reactor != nullptr)
+			{
+				_reactor->RecieveMessage(string(data));
+			}			
+		}	
 	}
+
+	
 }
 
 void Socket::Stop()

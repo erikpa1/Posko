@@ -22,7 +22,7 @@ void Rectangle::Construct()
 }
 
 void Rectangle::Destruct()
-{
+{	
 	delete _color;
 	delete _source;
 	_source = nullptr;
