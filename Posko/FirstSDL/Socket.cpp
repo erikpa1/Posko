@@ -3,7 +3,7 @@
 #include <iostream>
 
 #define SERVER "frios2.fri.uniza.sk" //127.0.0.1
-#define PORT 12357  //123456
+#define PORT 12356 //123456
 
 using namespace std;
 

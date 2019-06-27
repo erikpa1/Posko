@@ -21,7 +21,7 @@ FC=gfortran
 AS=as
 
 # Macros
-CND_PLATFORM=GNU-Linux
+CND_PLATFORM=GNU-Linux-x86
 CND_DLIB_EXT=so
 CND_CONF=Debug
 CND_DISTDIR=dist
@@ -67,32 +67,32 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/pongserver: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/pongserver ${OBJECTFILES} ${LDLIBSOPTIONS} -pthread
 
-${OBJECTDIR}/AppControll.o: AppControll.cpp
+${OBJECTDIR}/AppControll.o: AppControll.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AppControll.o AppControll.cpp
 
-${OBJECTDIR}/Ball.o: Ball.cpp
+${OBJECTDIR}/Ball.o: Ball.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Ball.o Ball.cpp
 
-${OBJECTDIR}/NetworkReactor.o: NetworkReactor.cpp
+${OBJECTDIR}/NetworkReactor.o: NetworkReactor.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/NetworkReactor.o NetworkReactor.cpp
 
-${OBJECTDIR}/Player.o: Player.cpp
+${OBJECTDIR}/Player.o: Player.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Player.o Player.cpp
 
-${OBJECTDIR}/Socket.o: Socket.cpp
+${OBJECTDIR}/Socket.o: Socket.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Socket.o Socket.cpp
 
-${OBJECTDIR}/main.o: main.cpp
+${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
@@ -103,6 +103,7 @@ ${OBJECTDIR}/main.o: main.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/pongserver
 
 # Subprojects
 .clean-subprojects:
